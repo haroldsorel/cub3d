@@ -85,35 +85,11 @@ static int	reformat_map(char **map)
 	return (0);
 }
 
-static void	init_player_position(char **map, t_player *player)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (map[i] != NULL)
-	{
-		j = 0;
-		while (map[i][j] != '\0')
-		{
-			if (ft_strchr("NSWE", map[i][j]) != NULL)
-			{
-				player->pos.x = j;
-				player->pos.y = i;
-			}
-			j++;
-		}
-		i++;	
-	}
-}
-
 int	map_parser(t_data *data)
 {
 	if (reformat_map(data->map->matrix) == -1)
 		return (-1);
 	if (is_valid_map(data->map->matrix) == 0)
 		return (-1);
-	init_player_position(data->map->matrix, data->player);
 	return (0);
 }

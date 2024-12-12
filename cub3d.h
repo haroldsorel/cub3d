@@ -24,6 +24,9 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
+#define SPEED 3
+#define RSPEED 0.2
+
 /*	color constants	*/
 # define RED 0x00FF0000
 # define BLACK 0x000000
@@ -48,15 +51,24 @@
 # define KEY_ESCAPE 53
 # define MOUSE_DOWN 4
 # define MOUSE_UP 5
-# define KEY_P 35
-# define KEY_O 31
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
 # define KEY_D 2
+
 
 typedef struct	s_pos
 {
 	double	x;
 	double	y;
-}	t_pos;
+}
+	t_pos;
+
+typedef struct	s_map_pos
+{
+	double	x;
+	double	y;
+}	t_map_pos;
 
 typedef struct	s_grid
 {
@@ -78,7 +90,16 @@ typedef struct s_map
 
 typedef	struct s_player
 {
-	t_pos	pos;
+	t_pos		pos;
+	t_pos		dir;
+	t_map_pos	map_pos;
+	char		starting_dir;
+	int			rotating_left;
+	int			rotating_right;
+	int			moving_left;
+	int			moving_right;
+	int			moving_forward;
+	int			moving_back;
 }	t_player;
 
 typedef struct s_img
@@ -96,7 +117,7 @@ typedef struct s_data
 	t_player	*player;
 	void		*mlx;
 	void		*mlx_win;
-	t_img		*img;
+	t_img		img;
 	int			width;
 	int			height;
 }	t_data;
@@ -121,7 +142,20 @@ int		rgb_parser(t_map *map, char *type, char *str);
 int		texture_parser(t_map *map, char *orientation, char *path);
 int		map_parser(t_data *data);
 int		is_valid_map(char **map);
+void	player_parser(t_data *data);
 
+/*events*/
+int		handle_keys(int key, t_data *data);
+int		handle_rkeys(int key, t_data *data);
+int		handle_destroy(t_data *data);
+void	handle_rotation(int key, t_data *data);
+void	handle_stop_rotation(int key, t_data *data);
+void	handle_movement(int key, t_data *data);
+void	handle_stop_movement(int key, t_data *data);
+void	rotate(t_player *player, double rad);
+void	ws_move(t_player *player, int distance);
+void	ad_move(t_player *player, int distance, char key);
+int		update_and_render(t_data *data);
 
 int		is_valid_map(char **map);
 

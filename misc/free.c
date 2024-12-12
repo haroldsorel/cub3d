@@ -35,6 +35,7 @@ void	*free_map(t_map *map)
 	free(map->we_text);
 	free(map->ea_text);
 	free_array_of_pointers((void **)map->matrix);
+	//free mlx stuff
 	return (NULL);
 }
 

@@ -85,5 +85,6 @@ int	parser(t_data *data, int fd)
 	}
 	if (map_parser(data) == -1)
 		return (free_data(data), -1);
+	player_parser(data);
 	return (0);
 }

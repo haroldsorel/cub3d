@@ -9,22 +9,26 @@ SRCS =	main.c \
 		get_next_line/get_next_line_utils.c \
 		get_next_line/get_next_line.c \
 		misc/free.c \
+		misc/mlx_utils.c \
 		parser/parser.c \
 		parser/rgb_parser.c \
 		parser/map_parser.c \
+		parser/player_parser.c \
 		parser/texture_parser.c \
 		parser/parser_utils.c \
-		parser/map_validity.c
+		parser/map_validity.c \
+		events/handle_keys.c \
+		events/handle_loops.c \
+		events/handle_mouse.c \
+		events/handle_movement.c \
+		events/handle_rotation.c \
 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-#$(NAME):	$(libft) $(mlx) $(OBJS)
-#			$(CC) $(CFLAGS) $(OBJS) libft/libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-
-$(NAME):	$(libft) $(OBJS)
-			$(CC) $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME)
+$(NAME):	$(libft) $(mlx) $(OBJS)
+			$(CC) $(CFLAGS) $(OBJS) libft/libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 $(libft):
 	@make -C libft
