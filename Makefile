@@ -1,6 +1,6 @@
 NAME = cub3d
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -I. -Ilibft #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -I. -Ilibft -fsanitize=address
 INCLUDES = cub3d.h
 mlx = mlx/libmlx.a
 libft = libft/libft.a
@@ -22,6 +22,9 @@ SRCS =	main.c \
 		events/handle_mouse.c \
 		events/handle_movement.c \
 		events/handle_rotation.c \
+		events/move.c \
+		minimap/render_map.c \
+		minimap/minimap_loop.c
 
 OBJS = $(SRCS:.c=.o)
 

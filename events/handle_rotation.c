@@ -11,17 +11,19 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
-void	rotate(t_player *player, double rad)
+void	rotate(t_data *data, double rad)
 {
 	float new_dir_x;
     float new_dir_y; 
 
-	new_dir_x = player->dir.x * cos(rad) - player->dir.y * sin(rad);
-	new_dir_y = player->dir.x * sin(rad) + player->dir.y * cos(rad);
-    
-    player->dir.x = new_dir_x;
-    player->dir.y = new_dir_y;
-	printf("Player Rotated! New Direction: (%f, %f)\n", player->dir.x, player->dir.y);
+	new_dir_x = data->player->dir.x * cos(rad) - data->player->dir.y * sin(rad);
+	new_dir_y = data->player->dir.x * sin(rad) + data->player->dir.y * cos(rad);
+    mlx_draw_line(data, data->player, BLACK);
+    data->player->dir.x = new_dir_x;
+    data->player->dir.y = new_dir_y;
+	update_player_pos(data, RED);
+	mlx_draw_line(data, data->player, GREEN);
+	printf("Player Rotated! New Direction: (%f, %f)\n", data->player->dir.x, data->player->dir.y);
 }
 
 void	handle_rotation(int key, t_data *data)

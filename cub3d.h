@@ -21,11 +21,11 @@
 # include "libft/libft.h"
 # include "mlx/mlx.h"
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1400
+# define HEIGHT 850
 
 #define SPEED 3
-#define RSPEED 0.2
+#define RSPEED 0.05
 
 /*	color constants	*/
 # define RED 0x00FF0000
@@ -57,18 +57,18 @@
 # define KEY_D 2
 
 
+typedef struct	s_mat_pos
+{
+	int	x;
+	int	y;
+}
+	t_mat_pos;
+
 typedef struct	s_pos
 {
 	double	x;
 	double	y;
-}
-	t_pos;
-
-typedef struct	s_map_pos
-{
-	double	x;
-	double	y;
-}	t_map_pos;
+}	t_pos;
 
 typedef struct	s_grid
 {
@@ -85,6 +85,7 @@ typedef struct s_map
 	char		*ea_text;
 	int			ceiling_color;
 	int			floor_color;
+	int			grid_size;
 	int			info;
 }	t_map;
 
@@ -92,7 +93,7 @@ typedef	struct s_player
 {
 	t_pos		pos;
 	t_pos		dir;
-	t_map_pos	map_pos;
+	t_mat_pos	mat_pos;
 	char		starting_dir;
 	int			rotating_left;
 	int			rotating_right;
@@ -100,6 +101,7 @@ typedef	struct s_player
 	int			moving_right;
 	int			moving_forward;
 	int			moving_back;
+	double		radius;
 }	t_player;
 
 typedef struct s_img
@@ -143,6 +145,7 @@ int		texture_parser(t_map *map, char *orientation, char *path);
 int		map_parser(t_data *data);
 int		is_valid_map(char **map);
 void	player_parser(t_data *data);
+void	calculate_grid_size(t_data *data);
 
 /*events*/
 int		handle_keys(int key, t_data *data);
@@ -152,11 +155,19 @@ void	handle_rotation(int key, t_data *data);
 void	handle_stop_rotation(int key, t_data *data);
 void	handle_movement(int key, t_data *data);
 void	handle_stop_movement(int key, t_data *data);
-void	rotate(t_player *player, double rad);
-void	ws_move(t_player *player, int distance);
-void	ad_move(t_player *player, int distance, char key);
-int		update_and_render(t_data *data);
+void	rotate(t_data *data, double rad);
+void    move(t_data *data, int key, int distance);
+int		game_loop(t_data *data);
+int		minimap_loop(t_data *data);
+void	update_player_pos(t_data *data, int color);
 
 int		is_valid_map(char **map);
+
+/*render minimap*/
+void    render_minimap(t_data *data);
+
+void    mlx_draw_square(t_data *data, int x, int y, int color);
+void    mlx_draw_circle(t_data *data, t_player *player, int color);
+void	mlx_draw_line(t_data *data, t_player *player, int color);
 
 #endif

@@ -35,7 +35,7 @@ static void	init_player_direction(t_player *player, char dir)
 	}
 }
 
-static void	init_player_position(char **map, t_player *player)
+static void	init_player_position(char **map, t_player *player, int offset)
 {
 	int	i;
 	int	j;
@@ -49,11 +49,12 @@ static void	init_player_position(char **map, t_player *player)
 		{
 			if (ft_strchr("NSWE", map[i][j]) != NULL)
 			{
-				player->pos.x = j;
-				player->pos.y = i;
-				player->map_pos.x = j; //this is incorrect, map it to the graphic env
-				player->map_pos.y = i; //also
+				player->mat_pos.x = j;
+				player->mat_pos.y = i;
+				player->pos.x = j * offset;
+				player->pos.y = i * offset;
 				player->starting_dir = map[i][j];
+				map[i][j] = '0';
 			}
 			j++;
 		}
@@ -63,6 +64,7 @@ static void	init_player_position(char **map, t_player *player)
 
 void	player_parser(t_data *data)
 {
-	init_player_position(data->map->matrix, data->player);
+	init_player_position(data->map->matrix, data->player, data->map->grid_size);
 	init_player_direction(data->player, data->player->starting_dir);
+	data->player->radius = 0.8f * (data->map->grid_size / 2);
 }

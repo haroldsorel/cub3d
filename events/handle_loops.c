@@ -11,23 +11,25 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
-int	update_and_render(t_data *data)
+void	movement_loop(t_data *data)
 {
-	my_mlx_pixel_put(&(data->img), data->player->pos.x, data->player->pos.y, BLACK);
 	if (data->player->moving_forward == 1)
-		ws_move(data->player, SPEED);
+		move(data, 'w', SPEED);
 	if (data->player->moving_back == 1)
-		ws_move(data->player, -SPEED);
+		move(data, 's', -SPEED);
 	if (data->player->moving_left == 1)
-		ad_move(data->player, SPEED, 'a');
+		move(data, 'a' , SPEED);
 	if (data->player->moving_right == 1)
-		ad_move(data->player, SPEED, 'd');
-	if (data->player->rotating_left)
-		rotate(data->player, -RSPEED);
-	if (data->player->rotating_right)
-		rotate(data->player, RSPEED);
-	mlx_clear_window(data->mlx, data->mlx_win);
-	my_mlx_pixel_put(&(data->img), data->player->pos.x, data->player->pos.y, RED);
+		move(data, 'd' , SPEED);
+	if (data->player->rotating_left == 1)
+		rotate(data, -RSPEED);
+	if (data->player->rotating_right == 1)
+		rotate(data, RSPEED);
+}
+
+int	game_loop(t_data *data)
+{
+	movement_loop(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img_ptr, 0, 0);
 	return (0);
 }

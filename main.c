@@ -30,6 +30,10 @@ void	print_data_info(t_data *data)
 	}
 	printf("Player x position : %f\n", data->player->pos.x);
 	printf("Player y position : %f\n", data->player->pos.y);
+	printf("Player x matrix position : %d\n", data->player->mat_pos.x);
+	printf("Player y matrix position : %d\n", data->player->mat_pos.y);
+	printf("Player radius size : %f\n", data->player->radius);
+	printf("grid size : %d\n", data->map->grid_size);
 }
 
 void	init_hooks(t_data *data)
@@ -38,7 +42,14 @@ void	init_hooks(t_data *data)
 	mlx_hook(data->mlx_win, 3, 0, handle_rkeys, data);
 	//mlx_hook(data->mlx_win, 4, 0, mouse_down_handle, data);
 	mlx_hook(data->mlx_win, 17, 0, handle_destroy, data);
-	mlx_loop_hook(data->mlx, update_and_render, data);
+	mlx_loop_hook(data->mlx, game_loop, data);
+}
+
+void	init_game(t_data *data)
+{
+	render_minimap(data);
+	update_player_pos(data, RED);
+	mlx_draw_line(data, data->player, GREEN);
 }
 
 int	minilibx_init(t_data *data)
@@ -49,11 +60,12 @@ int	minilibx_init(t_data *data)
 	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
 	if (data->mlx_win == NULL)
 		return (-1);
-	data->img.img_ptr = mlx_new_image(data->mlx, WIDTH/2, HEIGHT);
+	data->img.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (data->img.img_ptr == NULL)
 		return (-1);
 	data->img.pixel_ptr = mlx_get_data_addr(data->img.img_ptr,
 			&(data->img.bpp), &(data->img.line_len), &(data->img.endian)); //bbp=32 linelen=7680 and endian=0
+	init_game(data);
 	init_hooks(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img_ptr, 0, 0);
 	return (0);
@@ -63,8 +75,8 @@ void	init_structures(t_data *data, t_map *map, t_player *player)
 {
 	player->pos.x = 0;
 	player->pos.y = 0;
-	player->map_pos.x = 0;
-	player->map_pos.y = 0;
+	player->mat_pos.x = 0;
+	player->mat_pos.y = 0;
 	player->starting_dir = 'N';
 	player->dir.x = 0;
 	player->dir.y = -1;
@@ -74,6 +86,7 @@ void	init_structures(t_data *data, t_map *map, t_player *player)
 	player->moving_right = 0;
 	player->rotating_left = 0;
 	player->rotating_right = 0;
+	player->radius = 0;
 	map->ceiling_color = -1;
 	map->floor_color = -1;
 	map->no_text = NULL;
@@ -87,7 +100,8 @@ void	init_structures(t_data *data, t_map *map, t_player *player)
 	data->mlx = NULL;
 	data->mlx_win = NULL;
 	data->player = player;
-	data->map = map; 
+	data->map = map;
+	data->map->grid_size = 0;
 }
 
 
