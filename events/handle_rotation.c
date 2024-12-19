@@ -18,12 +18,8 @@ void	rotate(t_data *data, double rad)
 
 	new_dir_x = data->player->dir.x * cos(rad) - data->player->dir.y * sin(rad);
 	new_dir_y = data->player->dir.x * sin(rad) + data->player->dir.y * cos(rad);
-    mlx_draw_line(data, data->player, BLACK);
     data->player->dir.x = new_dir_x;
     data->player->dir.y = new_dir_y;
-	update_player_pos(data, RED);
-	mlx_draw_line(data, data->player, GREEN);
-	printf("Player Rotated! New Direction: (%f, %f)\n", data->player->dir.x, data->player->dir.y);
 }
 
 void	handle_rotation(int key, t_data *data)

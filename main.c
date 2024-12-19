@@ -45,13 +45,6 @@ void	init_hooks(t_data *data)
 	mlx_loop_hook(data->mlx, game_loop, data);
 }
 
-void	init_game(t_data *data)
-{
-	render_minimap(data);
-	update_player_pos(data, RED);
-	mlx_draw_line(data, data->player, GREEN);
-}
-
 int	minilibx_init(t_data *data)
 {
 	data->mlx = mlx_init();
@@ -65,7 +58,6 @@ int	minilibx_init(t_data *data)
 		return (-1);
 	data->img.pixel_ptr = mlx_get_data_addr(data->img.img_ptr,
 			&(data->img.bpp), &(data->img.line_len), &(data->img.endian)); //bbp=32 linelen=7680 and endian=0
-	init_game(data);
 	init_hooks(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img_ptr, 0, 0);
 	return (0);

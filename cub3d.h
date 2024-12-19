@@ -170,4 +170,6 @@ void    mlx_draw_square(t_data *data, int x, int y, int color);
 void    mlx_draw_circle(t_data *data, t_player *player, int color);
 void	mlx_draw_line(t_data *data, t_player *player, int color);
 
+void    raycaster(t_data *data, int color);
+
 #endif
