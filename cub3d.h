@@ -171,5 +171,6 @@ void    mlx_draw_circle(t_data *data, t_player *player, int color);
 void	mlx_draw_line(t_data *data, t_player *player, int color);
 
 void    raycaster(t_data *data, int color);
-
+void	castRay(t_data *data, t_player *player);
+double  dda_x(t_data *data, t_player *player);
 #endif

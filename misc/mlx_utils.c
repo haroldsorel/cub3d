@@ -20,11 +20,20 @@ void    mlx_draw_line(t_data *data, t_player *player, int color)
     i = 0;
     y = player->pos.y;
     x = player->pos.x;
-    if (player->dir.x == 0.0f || player->dir.x == -0.0f)
+    if ((player->dir.x == 0.0f || player->dir.x == -0.0f) && player->dir.x > 0.0f)
     {
         while ((data->map->matrix)[(int)(y + i) / data->map->grid_size][(int)x / data->map->grid_size] == '0')
         {
             my_mlx_pixel_put(&(data->img), (int)(player->pos.x), (int)(player->pos.y + i), color);
+            i++;
+        }
+        return ;
+    }
+    if ((player->dir.x == 0.0f || player->dir.x == -0.0f) && player->dir.x < 0.0f)
+    {
+        while ((data->map->matrix)[(int)(y - i) / data->map->grid_size][(int)x / data->map->grid_size] == '0')
+        {
+            my_mlx_pixel_put(&(data->img), (int)(player->pos.x), (int)(player->pos.y - i), color);
             i++;
         }
         return ;
@@ -37,6 +46,7 @@ void    mlx_draw_line(t_data *data, t_player *player, int color)
         i++;
     }
 }
+
 
 /*not a very efficient method, learn the midpoint cirlce algorithm to increase performance*/
 void    mlx_draw_circle(t_data *data, t_player *player, int color)
@@ -80,7 +90,10 @@ void    mlx_draw_square(t_data *data, int x, int y, int color)
         i = 0;
         while (i < grid_size)
         {
-            my_mlx_pixel_put(&(data->img), x + i, y + j, color);
+            if (i == 0 || j == 0)
+                my_mlx_pixel_put(&(data->img), x + i, y + j, PURPLE);
+            else
+                my_mlx_pixel_put(&(data->img), x + i, y + j, color);
             i++;
         } 
         j++;
