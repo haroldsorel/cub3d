@@ -11,60 +11,90 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
-void castRay(t_data *data, t_player *player)
+void    init_ray(t_dda *ray, t_data *data, double dirx, double diry)
 {
-    int mapX = (int)player->pos.x / data->map->grid_size;
-    int mapY = (int)player->pos.y / data->map->grid_size;
-    double deltaDistX = fabs(data->map->grid_size / player->dir.x);
-    double deltaDistY = fabs(data->map->grid_size / player->dir.y);
-    int stepX, stepY;
-    double sideDistX, sideDistY;
-
-    if (player->dir.x < 0) 
+    ray->x = (int)(data->player->pos.x / data->map->grid_size);
+    ray->y = (int)(data->player->pos.y / data->map->grid_size);
+    ray->delta_x = fabs(data->map->grid_size / dirx);
+    ray->delta_y = fabs(data->map->grid_size / diry);
+    ray->dir_x = dirx;
+    ray->dir_y = diry;
+    if (ray->dir_x < 0.0f)
     {
-        stepX = -1;
-        sideDistX = fabs((player->pos.x - (data->map->grid_size * mapX) / player->dir.x));
-    } 
+        ray->inc_x = -1;
+        ray->len_x = fabs((data->player->pos.x - (ray->x * data->map->grid_size)) / dirx);
+    }
     else
     {
-        stepX = 1;
-        sideDistX = ((data->map->grid_size * (mapX + 1)) - player->pos.x) / player->dir.x;
+        ray->inc_x = 1;
+        ray->len_x = fabs((((ray->x + 1) * data->map->grid_size) - data->player->pos.x) / dirx);
     }
-    if (player->dir.y < 0)
+    if (ray->dir_y < 0.0f)
     {
-        stepY = -1;
-        sideDistY = fabs((player->pos.y - (data->map->grid_size * mapY) / player->dir.y));
-    } else
-    {
-        stepY = 1;
-        sideDistY = ((data->map->grid_size * (mapY + 1)) - player->pos.y) / player->dir.y;
+        ray->inc_y = -1;
+        ray->len_y = fabs((data->player->pos.y - (ray->y * data->map->grid_size)) / diry);
     }
-    int hit = 0;
-    int side;
-    while (hit == 0)
+    else
     {
-        if (sideDistX < sideDistY)
-        {
-            sideDistX += deltaDistX;
-            mapX += stepX;
-            side = 0;
-        }
+        ray->inc_y = 1;
+        ray->len_y = fabs((((ray->y + 1) * data->map->grid_size) - data->player->pos.y) / diry);
+    }
+}
+
+void    draw_col(t_data *data, t_dda *ray, int col)
+{
+    int i;
+    double  wall_height;
+    int     draw_start;
+    int     draw_end;
+
+    wall_height = (data->map->grid_size * HEIGHT)/ ray->perp_len;
+    if (wall_height > HEIGHT)
+        wall_height = HEIGHT; //put maybe a -1
+    draw_start = HEIGHT / 2 - (wall_height / 2);
+    i = 0;
+    draw_end = wall_height + draw_start;
+    while (i < draw_start)
+    {
+        my_mlx_pixel_put(&(data->img2), col, i, CYAN);
+        i++;
+    }
+    while (i < draw_end)
+    {
+        if (ray->wall == 1)
+            my_mlx_pixel_put(&(data->img2), col, i, RED);
         else
-        {
-            sideDistY += deltaDistY;
-            mapY += stepY;
-            side = 1;
-        }
-        printf("%f, %f\n", player->dir.x, player->dir.y);
-        printf("current ray position: %d, %d\n", mapX , mapY);
-        if ((data->map->matrix)[mapY][mapX] == '1')
-            hit = 1;
+            my_mlx_pixel_put(&(data->img2), col, i, DARKER_RED);
+        i++;
     }
-    double perpWallDist;
-    if (side == 0) {
-        perpWallDist = (mapX - player->pos.x + (1 - stepX) / 2) / player->dir.x;
-    } else {
-        perpWallDist = (mapY - player->pos.y + (1 - stepY) / 2) / player->dir.y;
+    while (i < HEIGHT)
+    {
+        my_mlx_pixel_put(&(data->img2), col, i, BLACK);
+        i++;
     }
-    printf("Hit wall at mapX: %d, mapY: %d, Distance: %f\n", mapX, mapY, perpWallDist);
+    i = 0;
+}
+
+void    raycaster(t_data *data)
+{
+    t_dda   ray;
+    double  dirx;
+    double  diry;
+    double  angle;
+    double  step;
+    int     i;
+
+    i = 0;
+    step = FOV / (WIDTH / 2);
+    angle = -M_PI / 6;
+    while (angle < M_PI / 6)
+    {
+        dirx = data->player->dir.x * cos(angle) - data->player->dir.y * sin(angle);
+        diry = data->player->dir.x * sin(angle) + data->player->dir.y * cos(angle);
+        init_ray(&ray, data, dirx, diry);
+        dda(data, &ray);
+        draw_col(data, &ray, i);
+        i++;
+        angle += step;
+    }
 }

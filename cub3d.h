@@ -23,12 +23,14 @@
 
 # define WIDTH 1400
 # define HEIGHT 850
+# define FOV (M_PI / 3)
 
 #define SPEED 3
 #define RSPEED 0.05
 
 /*	color constants	*/
 # define RED 0x00FF0000
+# define DARKER_RED 0x00D90000
 # define BLACK 0x000000
 # define WHITE 0xFFFFFF
 # define BLUE 0x0000FF
@@ -120,9 +122,27 @@ typedef struct s_data
 	void		*mlx;
 	void		*mlx_win;
 	t_img		img;
+	t_img		img2;
 	int			width;
 	int			height;
 }	t_data;
+
+typedef struct s_dda
+{
+    int     x;
+    int     y;
+	int		wall;
+	double	dir_x;
+	double	dir_y;
+    double  inc_x;
+    double  inc_y;
+    double  delta_x;
+    double  delta_y;
+    double  len_x;
+    double  len_y;
+	double	len;
+	double	perp_len;
+}   t_dda;
 
 /*get_next_line*/
 char	*get_next_line(int fd);
@@ -170,7 +190,7 @@ void    mlx_draw_square(t_data *data, int x, int y, int color);
 void    mlx_draw_circle(t_data *data, t_player *player, int color);
 void	mlx_draw_line(t_data *data, t_player *player, int color);
 
-void    raycaster(t_data *data, int color);
+void    raycaster(t_data *data);
 void	castRay(t_data *data, t_player *player);
-double  dda_x(t_data *data, t_player *player);
+void  dda(t_data *data, t_dda *dda);
 #endif

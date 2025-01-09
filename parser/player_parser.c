@@ -66,5 +66,5 @@ void	player_parser(t_data *data)
 {
 	init_player_position(data->map->matrix, data->player, data->map->grid_size);
 	init_player_direction(data->player, data->player->starting_dir);
-	data->player->radius = 0.8f * (data->map->grid_size / 2);
+	data->player->radius = 0.2f * (data->map->grid_size / 2);
 }

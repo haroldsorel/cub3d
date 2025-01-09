@@ -11,59 +11,50 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
-double  dda(t_data *data, t_player *player)
+static void get_perp_distance(t_data *data, t_dda *ray)
 {
-    int     x;
-    int     y;
-    double  x_inc;
-    double  y_inc;
-    double  delta_x;
-    double  delta_y;
-    double  len_x;
-    double  len_y;
+    double  player_angle;
+    double  ray_angle;
+    double  angle_diff;
 
-    x = (int)(player->pos.x / data->map->grid_size);
-    y = (int)(player->pos.y / data->map->grid_size);
-    delta_x = fabs(data->map->grid_size / player->dir.x);
-    delta_y = fabs(data->map->grid_size / player->dir.y);
-    // what happens if dir x = 0 or dir y = 0??
-    if (player->dir.x < 0.0f)
+    player_angle = atan2(data->player->dir.y, data->player->dir.x);
+    ray_angle = atan2(ray->dir_y, ray->dir_x);
+    angle_diff = player_angle - ray_angle;
+    ray->perp_len = ray->len * cos(angle_diff);
+}
+
+void    dda(t_data *data, t_dda *ray)
+{
+    int wall;
+    while (1)
     {
-        x_inc = -1;
-        len_x = fabs((player->pos.x - (x * data->map->grid_size)) / player->dir.x);
-    }
-    else
-    {
-        x_inc = 1;
-        len_x = fabs((((x + 1) * data->map->grid_size) - player->pos.x) / player->dir.x);
-    }
-    if (player->dir.y < 0.0f)
-    {
-        y_inc = -1;
-        len_y = fabs((player->pos.y - (y * data->map->grid_size)) / player->dir.y);
-    }
-    else
-    {
-        y_inc = 1;
-        len_y = fabs((((y + 1) * data->map->grid_size) - player->pos.y) / player->dir.y);
-    }
-    while ((data->map->matrix)[y][x] != '1')
-    {
-        printf("current ray_pos (%d, %d) xray is : %f yray is : %f\n", x, y, len_x, len_y);
-        if (len_x < len_y)
+        if (ray->len_x < ray->len_y)
         {
-            printf("ray crosses x = %d\n", x);
-            x += x_inc;
-            len_x += delta_x;
+            if (ray->dir_x > 0.0f)
+                my_mlx_pixel_put(&(data->img), (ray->x + 1) * data->map->grid_size, data->player->pos.y + (ray->len_x * ray->dir_y), GREEN);
+            else
+                my_mlx_pixel_put(&(data->img), ray->x * data->map->grid_size, data->player->pos.y + (ray->len_x * ray->dir_y), GREEN);
+            ray->x += ray->inc_x;
+            ray->len_x += ray->delta_x;
+            wall = 1;
         }
         else
         {
-            printf("ray crosses y = %d\n", y);
-            y += y_inc;
-            len_y += delta_y;
+            if (ray->dir_y > 0.0f)
+                my_mlx_pixel_put(&(data->img), data->player->pos.x + (ray->len_y * ray->dir_x),  (ray->y + 1) * data->map->grid_size, GREEN);
+            else
+                my_mlx_pixel_put(&(data->img), data->player->pos.x + (ray->len_y * ray->dir_x),  ray->y * data->map->grid_size, GREEN);
+            ray->y += ray->inc_y;
+            ray->len_y += ray->delta_y;
+            wall = 0;
         }
-        //what happens if they are equal
+        if ((data->map->matrix)[ray->y][ray->x] == '1')
+            break ;
     }
-    printf("\n\n");
-    return (len_x);
+    ray->wall = wall;
+    if (wall == 1)
+        ray->len = ray->len_x - ray->delta_x;
+    else
+        ray->len = ray->len_y - ray->delta_y;
+    get_perp_distance(data, ray);
 }

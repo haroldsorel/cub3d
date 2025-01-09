@@ -53,11 +53,16 @@ int	minilibx_init(t_data *data)
 	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
 	if (data->mlx_win == NULL)
 		return (-1);
-	data->img.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	data->img.img_ptr = mlx_new_image(data->mlx, WIDTH / 2, HEIGHT);
 	if (data->img.img_ptr == NULL)
+		return (-1);
+	data->img2.img_ptr = mlx_new_image(data->mlx, WIDTH / 2, HEIGHT);
+	if (data->img2.img_ptr == NULL)
 		return (-1);
 	data->img.pixel_ptr = mlx_get_data_addr(data->img.img_ptr,
 			&(data->img.bpp), &(data->img.line_len), &(data->img.endian)); //bbp=32 linelen=7680 and endian=0
+	data->img2.pixel_ptr = mlx_get_data_addr(data->img2.img_ptr,
+			&(data->img2.bpp), &(data->img2.line_len), &(data->img2.endian)); //bbp=32 linelen=7680 and endian=0
 	init_hooks(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img_ptr, 0, 0);
 	return (0);

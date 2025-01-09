@@ -32,8 +32,9 @@ int	game_loop(t_data *data)
 	render_minimap(data);
 	movement_loop(data);
 	update_player_pos(data, RED);
-	mlx_draw_line(data, data->player, GREEN);
-	dda_x(data, data->player);
+	mlx_draw_line(data, data->player, BROWN);
+	raycaster(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img2.img_ptr, WIDTH / 2, 0);
 	return (0);
 }

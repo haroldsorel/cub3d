@@ -11,49 +11,73 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
-void	move_forward(t_data *data, int distance)
-{
-	double  new_pos_x;
-    double  new_pos_y;
 
-	new_pos_x = data->player->pos.x + data->player->dir.x * distance;
-	new_pos_y = data->player->pos.y + data->player->dir.y * distance;
-    data->player->pos.x = new_pos_x;
-    data->player->pos.y = new_pos_y;
+void move_forward(t_data *data, int distance)
+{
+    double new_pos_x;
+    double new_pos_y;
+    double checker_x;
+    double checker_y;
+
+    new_pos_x = data->player->pos.x + data->player->dir.x * distance;
+    new_pos_y = data->player->pos.y + data->player->dir.y * distance;
+    checker_x = new_pos_x + data->player->radius * data->player->dir.x;
+    checker_y = new_pos_y + data->player->radius * data->player->dir.y;
+    if ((data->map->matrix)[(int)(data->player->pos.y / data->map->grid_size)][(int)(checker_x / data->map->grid_size)] != '1')
+        data->player->pos.x = new_pos_x;
+    if ((data->map->matrix)[(int)(checker_y / data->map->grid_size)][(int)(data->player->pos.x / data->map->grid_size)] != '1')
+        data->player->pos.y = new_pos_y;
 }
 
 void	move_backward(t_data *data, int distance)
 {
 	double  new_pos_x;
     double  new_pos_y;
+    double  checker_x;
+    double  checker_y;
 
 	new_pos_x = data->player->pos.x + data->player->dir.x * distance;
 	new_pos_y = data->player->pos.y + data->player->dir.y * distance;
-    data->player->pos.x = new_pos_x;
-    data->player->pos.y = new_pos_y;
+    checker_x = new_pos_x - data->player->radius * data->player->dir.x;
+    checker_y = new_pos_y - data->player->radius * data->player->dir.y;
+    if ((data->map->matrix)[(int)(data->player->pos.y / data->map->grid_size)][(int)(checker_x / data->map->grid_size)] != '1')
+        data->player->pos.x = new_pos_x;
+    if ((data->map->matrix)[(int)(checker_y / data->map->grid_size)][(int)(data->player->pos.x / data->map->grid_size)] != '1')
+        data->player->pos.y = new_pos_y;
 }
 
 void	move_right(t_data *data, int distance)
 {
 	double  new_pos_x;
     double  new_pos_y;
-    
+    double  checker_x;
+    double  checker_y;
 
 	new_pos_x = data->player->pos.x - data->player->dir.y * distance;
     new_pos_y = data->player->pos.y + data->player->dir.x * distance;
-    data->player->pos.x = new_pos_x;
-    data->player->pos.y = new_pos_y;
+    checker_x = new_pos_x - data->player->radius * data->player->dir.y;
+    checker_y = new_pos_y + data->player->radius * data->player->dir.x;
+    if ((data->map->matrix)[(int)(data->player->pos.y / data->map->grid_size)][(int)(checker_x / data->map->grid_size)] != '1')
+        data->player->pos.x = new_pos_x;
+    if ((data->map->matrix)[(int)(checker_y / data->map->grid_size)][(int)(data->player->pos.x / data->map->grid_size)] != '1')
+        data->player->pos.y = new_pos_y;
 }
 
 void	move_left(t_data *data, int distance)
 {
 	double  new_pos_x;
     double  new_pos_y;
+    double  checker_x;
+    double  checker_y;
 
 	new_pos_x = data->player->pos.x + data->player->dir.y * distance;
     new_pos_y = data->player->pos.y - data->player->dir.x * distance;
-    data->player->pos.x = new_pos_x;
-    data->player->pos.y = new_pos_y;
+    checker_x = new_pos_x + data->player->dir.y * data->player->radius;
+    checker_y = new_pos_y - data->player->dir.x * data->player->radius;
+    if ((data->map->matrix)[(int)(data->player->pos.y / data->map->grid_size)][(int)(checker_x / data->map->grid_size)] != '1')
+        data->player->pos.x = new_pos_x;
+    if ((data->map->matrix)[(int)(checker_y / data->map->grid_size)][(int)(data->player->pos.x / data->map->grid_size)] != '1')
+        data->player->pos.y = new_pos_y;
 }
 
 void    move(t_data *data, int key, int distance)

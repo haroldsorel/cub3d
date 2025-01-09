@@ -26,7 +26,7 @@ SRCS =	main.c \
 		minimap/render_map.c \
 		minimap/minimap_loop.c \
 		raycaster/raycaster.c \
-		raycaster/dda.c \
+		raycaster/dda.c
 
 OBJS = $(SRCS:.c=.o)
 

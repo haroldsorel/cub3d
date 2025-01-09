@@ -91,7 +91,7 @@ void    mlx_draw_square(t_data *data, int x, int y, int color)
         while (i < grid_size)
         {
             if (i == 0 || j == 0)
-                my_mlx_pixel_put(&(data->img), x + i, y + j, PURPLE);
+                my_mlx_pixel_put(&(data->img), x + i, y + j, BLUE);
             else
                 my_mlx_pixel_put(&(data->img), x + i, y + j, color);
             i++;
