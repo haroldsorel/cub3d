@@ -47,18 +47,30 @@ void    draw_col(t_data *data, t_dda *ray, int col)
     double  wall_height;
     int     draw_start;
     int     draw_end;
+    //int     texture_y;
+    //int     texture_x;
+    //int     color;
+    //double     ratio;
 
     wall_height = (data->map->grid_size * HEIGHT)/ ray->perp_len;
     if (wall_height > HEIGHT)
-        wall_height = HEIGHT; //put maybe a -1
+        wall_height = HEIGHT;
     draw_start = HEIGHT / 2 - (wall_height / 2);
     i = 0;
     draw_end = wall_height + draw_start;
     while (i < draw_start)
     {
-        my_mlx_pixel_put(&(data->img2), col, i, CYAN);
+        my_mlx_pixel_put(&(data->img2), col, i, data->map->ceiling_color);
         i++;
     }
+    //ratio = wall_height / data->map->no_text.height;
+    while (i < draw_end)
+    {
+
+        //current i is 
+
+    }
+    /*
     while (i < draw_end)
     {
         if (ray->wall == 1)
@@ -67,12 +79,12 @@ void    draw_col(t_data *data, t_dda *ray, int col)
             my_mlx_pixel_put(&(data->img2), col, i, DARKER_RED);
         i++;
     }
+    */
     while (i < HEIGHT)
     {
-        my_mlx_pixel_put(&(data->img2), col, i, BLACK);
+        my_mlx_pixel_put(&(data->img2), col, i, data->map->floor_color);
         i++;
     }
-    i = 0;
 }
 
 void    raycaster(t_data *data)

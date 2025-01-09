@@ -30,10 +30,10 @@ void	*free_array_of_pointers(void **array)
 
 void	*free_map(t_map *map)
 {
-	free(map->no_text);
-	free(map->so_text);
-	free(map->we_text);
-	free(map->ea_text);
+	free(map->no_text.path);
+	free(map->so_text.path);
+	free(map->we_text.path);
+	free(map->ea_text.path);
 	free_array_of_pointers((void **)map->matrix);
 	//free mlx stuff
 	return (NULL);

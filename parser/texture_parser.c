@@ -13,13 +13,13 @@
 
 int repetition(t_map *map, char *orientation)
 {
-	if (ft_strcmp(orientation, "NO") == 0 && map->no_text != NULL)
+	if (ft_strcmp(orientation, "NO") == 0 && map->no_text.path != NULL)
 		return (ft_putstr_fd("File Error: Duplicate NO Texture\n", 2), 1);
-	else if (ft_strcmp(orientation, "SO") == 0 && map->so_text != NULL)
+	else if (ft_strcmp(orientation, "SO") == 0 && map->so_text.path != NULL)
 		return (ft_putstr_fd("File Error: Duplicate SO Texture\n", 2), 1);
-	else if (ft_strcmp(orientation, "WE") == 0 && map->we_text != NULL)
+	else if (ft_strcmp(orientation, "WE") == 0 && map->we_text.path != NULL)
 		return (ft_putstr_fd("File Error: Duplicate WE Texture\n", 2), 1);
-	else if (ft_strcmp(orientation, "EA") == 0 && map->ea_text != NULL)
+	else if (ft_strcmp(orientation, "EA") == 0 && map->ea_text.path != NULL)
 		return (ft_putstr_fd("File Error: Duplicate EA Texture\n", 2), 1);
 	return (0);
 }
@@ -30,17 +30,23 @@ int	texture_parser(t_map *map, char *orientation, char *path)
 
 	if (repetition(map, orientation) == 1)
 		return (-1);
+	if (access(path, F_OK) == -1) 
+	{
+        ft_putstr_fd("File Error: File Not Found: ", 2);
+        ft_putendl_fd(path, 2);
+		return (-1);
+	}
 	new_path = ft_strdup(path);
 	if (new_path == NULL)
 		return (-1);
 	if (ft_strcmp(orientation, "NO") == 0)
-		map->no_text = new_path;
+		map->no_text.path = new_path;
 	else if (ft_strcmp(orientation, "SO") == 0)
-		map->so_text = new_path;
+		map->so_text.path = new_path;
 	else if (ft_strcmp(orientation, "WE") == 0)
-		map->we_text = new_path;
+		map->we_text.path = new_path;
 	else if (ft_strcmp(orientation, "EA") == 0)
-		map->ea_text = new_path;
+		map->ea_text.path = new_path;
 	else
 		free(new_path);
 	map->info++;

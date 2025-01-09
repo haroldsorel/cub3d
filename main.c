@@ -16,10 +16,10 @@ void	print_data_info(t_data *data)
 	int	i;
 
 	i = 0;
-	printf("\n\nno_text :		%s\n", data->map->no_text);
-	printf("so_text :		%s\n", data->map->so_text);
-	printf("we_text :		%s\n", data->map->we_text);
-	printf("ea_text :		%s\n", data->map->ea_text);
+	printf("\n\nno_text :		%s size : %d x %d\n", data->map->no_text.path, data->map->no_text.width, data->map->no_text.height);
+	printf("so_text :		%s\n", data->map->so_text.path);
+	printf("we_text :		%s\n", data->map->we_text.path);
+	printf("ea_text :		%s\n", data->map->ea_text.path);
 	printf("floor color : 		%d\n", data->map->floor_color);
 	printf("ceiling color : 	%d\n", data->map->ceiling_color);
 	printf("info :			%d\n\n", data->map->info);
@@ -45,6 +45,23 @@ void	init_hooks(t_data *data)
 	mlx_loop_hook(data->mlx, game_loop, data);
 }
 
+int	init_textures(t_data *data, t_map *map)
+{
+	map->no_text.img = mlx_png_file_to_image(data->mlx, map->no_text.path, &(map->no_text.width), &(map->no_text.height));
+	if (map->no_text.img == NULL)
+		return (-1);
+	map->so_text.img = mlx_png_file_to_image(data->mlx, map->so_text.path, &(map->so_text.width), &(map->so_text.height));
+	if (map->so_text.img == NULL)
+		return (-1);
+	map->we_text.img = mlx_png_file_to_image(data->mlx, map->we_text.path, &(map->we_text.width), &(map->we_text.height));
+	if (map->we_text.img == NULL)
+		return (-1);
+	map->ea_text.img = mlx_png_file_to_image(data->mlx, map->ea_text.path, &(map->ea_text.width), &(map->ea_text.height));
+	if (map->ea_text.img == NULL)
+		return (-1);
+	return (0);
+}
+
 int	minilibx_init(t_data *data)
 {
 	data->mlx = mlx_init();
@@ -63,6 +80,9 @@ int	minilibx_init(t_data *data)
 			&(data->img.bpp), &(data->img.line_len), &(data->img.endian)); //bbp=32 linelen=7680 and endian=0
 	data->img2.pixel_ptr = mlx_get_data_addr(data->img2.img_ptr,
 			&(data->img2.bpp), &(data->img2.line_len), &(data->img2.endian)); //bbp=32 linelen=7680 and endian=0
+	if (init_textures(data, data->map) == -1)
+		return (-1);
+	print_data_info(data);
 	init_hooks(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img_ptr, 0, 0);
 	return (0);
@@ -86,10 +106,10 @@ void	init_structures(t_data *data, t_map *map, t_player *player)
 	player->radius = 0;
 	map->ceiling_color = -1;
 	map->floor_color = -1;
-	map->no_text = NULL;
-	map->so_text = NULL;
-	map->we_text = NULL;
-	map->ea_text = NULL;
+	map->no_text.path = NULL;
+	map->so_text.path = NULL;
+	map->we_text.path = NULL;
+	map->ea_text.path = NULL;
 	map->matrix = NULL;
 	map->info = 0;
 	data->height = HEIGHT;
@@ -118,7 +138,6 @@ int	main(int argc, char **argv)
 	init_structures(&data, &map, &player);
 	if (parser(&data, fd) == -1)
 		return (1);
-	print_data_info(&data);
 	if (minilibx_init(&data) == -1)
 		return (1);
 	mlx_loop(data.mlx);

@@ -78,13 +78,21 @@ typedef struct	s_grid
 	int	y;
 }	t_grid;
 
+typedef struct s_text
+{
+	void	*img;
+	char	*path;
+	int		width;
+	int		height;
+}	t_text;
+
 typedef struct s_map
 {
 	char		**matrix;
-	char		*no_text;
-	char		*so_text;
-	char		*we_text;
-	char		*ea_text;
+	t_text		no_text;
+	t_text		so_text;
+	t_text		we_text;
+	t_text		ea_text;
 	int			ceiling_color;
 	int			floor_color;
 	int			grid_size;
@@ -142,6 +150,8 @@ typedef struct s_dda
     double  len_y;
 	double	len;
 	double	perp_len;
+	int		tex_x;
+	int		tex_y;
 }   t_dda;
 
 /*get_next_line*/

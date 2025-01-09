@@ -33,7 +33,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME):	$(libft) $(mlx) $(OBJS)
-			$(CC) $(CFLAGS) $(OBJS) libft/libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJS) libft/libft.a -lz -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 $(libft):
 	@make -C libft
