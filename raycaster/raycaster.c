@@ -29,19 +29,16 @@ void    draw_ceiling_floor(t_data *data, t_ray *ray, int slice)
     }
 }
 
-int apply_shading(int color, double shading_factor)
+int apply_shading(int color, double factor)
 {
     int r = (color >> 16) & 0xFF;  
     int g = (color >> 8) & 0xFF;   
     int b = color & 0xFF;     
     int a = (color >> 24) & 0xFF;
 
-    r = (int)(r * shading_factor);
-    g = (int)(g * shading_factor);
-    b = (int)(b * shading_factor);
-    //r = r > 255 ? 255 : (r < 0 ? 0 : r);
-    //g = g > 255 ? 255 : (g < 0 ? 0 : g);
-    //b = b > 255 ? 255 : (b < 0 ? 0 : b);
+    r = (int)(r * factor);
+    g = (int)(g * factor);
+    b = (int)(b * factor);
 
     return (a << 24) | (r << 16) | (g << 8) | b;
 }
@@ -51,13 +48,17 @@ void    draw_slice(t_data *data, t_ray *ray, int slice)
     int     i;
     int     color;
     double  ratio;
+    int     offset;
 
     i = ray->draw_start;
     ratio = 1.0 * ray->text.width / ray->wall_height;
+    offset = 0;
+    if (ray->wall_height > HEIGHT)
+        offset = (ray->wall_height - HEIGHT) / 2;
     draw_ceiling_floor(data, ray, slice);
     while (i < ray->draw_end)
     {
-        ray->text_y = (i - ray->draw_start) * ratio;
+        ray->text_y = (i + offset - ray->draw_start) * ratio;
         color = ray->text.pixel_array[ray->text_y + (ray->text.width * ray->text_x)];
         if (ray->wall == 1)
             color = apply_shading(color, 0.8);
@@ -70,8 +71,6 @@ void    fill_tex_info(t_data *data, t_ray *ray)
 {
     double  ratio;
 
-    if (ray->wall_height > HEIGHT)
-        ray->wall_height = HEIGHT;
     ratio = fmod(ray->wall_intercept, data->map->grid_size) / data->map->grid_size;
     ray->text_x = (int)(ratio * ray->text.width);
     //you may want to flip. look at vicode get_text_coord function
@@ -80,10 +79,12 @@ void    fill_tex_info(t_data *data, t_ray *ray)
 void    fill_ray_info(t_data *data, t_ray *ray)
 {
     ray->wall_height = (data->map->grid_size * HEIGHT)/ ray->perp_len;
-    if (ray->wall_height > HEIGHT)
-        ray->wall_height = HEIGHT;
     ray->draw_start = HEIGHT / 2 - (ray->wall_height / 2);
+    if (ray->draw_start < 0)
+        ray->draw_start = 0;
     ray->draw_end = ray->wall_height + ray->draw_start;
+    if (ray->draw_end > HEIGHT)
+        ray->draw_end = HEIGHT;
     if (ray->wall == 1)
     {
         if (ray->dir.x > 0.0f)

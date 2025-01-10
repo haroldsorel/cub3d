@@ -1,9 +1,9 @@
-NO textures/wood.png
-SO textures/wood.png
-WE textures/wood.png
-EA textures/wood.png
+NO textures/bluestone.png
+SO textures/bluestone.png
+WE textures/bluestone.png
+EA textures/bluestone.png
 F 128,128,128
-C  0,255,255
+C  128,128,128
 
 1111111111
 1000001001
