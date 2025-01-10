@@ -11,87 +11,100 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
-void    init_ray(t_dda *ray, t_data *data, double dirx, double diry)
+void    draw_ceiling_floor(t_data *data, t_ray *ray, int slice)
 {
-    ray->x = (int)(data->player->pos.x / data->map->grid_size);
-    ray->y = (int)(data->player->pos.y / data->map->grid_size);
-    ray->delta_x = fabs(data->map->grid_size / dirx);
-    ray->delta_y = fabs(data->map->grid_size / diry);
-    ray->dir_x = dirx;
-    ray->dir_y = diry;
-    if (ray->dir_x < 0.0f)
+    int i;
+
+    i = 0;
+    while (i < ray->draw_start)
     {
-        ray->inc_x = -1;
-        ray->len_x = fabs((data->player->pos.x - (ray->x * data->map->grid_size)) / dirx);
+        my_mlx_pixel_put(&(data->img2), slice, i, data->map->ceiling_color);
+        i++;
     }
-    else
+    i = ray->draw_end;
+    while (i < HEIGHT)
     {
-        ray->inc_x = 1;
-        ray->len_x = fabs((((ray->x + 1) * data->map->grid_size) - data->player->pos.x) / dirx);
-    }
-    if (ray->dir_y < 0.0f)
-    {
-        ray->inc_y = -1;
-        ray->len_y = fabs((data->player->pos.y - (ray->y * data->map->grid_size)) / diry);
-    }
-    else
-    {
-        ray->inc_y = 1;
-        ray->len_y = fabs((((ray->y + 1) * data->map->grid_size) - data->player->pos.y) / diry);
+        my_mlx_pixel_put(&(data->img2), slice, i, data->map->floor_color);
+        i++;
     }
 }
 
-void    draw_col(t_data *data, t_dda *ray, int col)
+int apply_shading(int color, double shading_factor)
 {
-    int i;
-    double  wall_height;
-    int     draw_start;
-    int     draw_end;
-    //int     texture_y;
-    //int     texture_x;
-    //int     color;
-    //double     ratio;
+    int r = (color >> 16) & 0xFF;  
+    int g = (color >> 8) & 0xFF;   
+    int b = color & 0xFF;     
+    int a = (color >> 24) & 0xFF;
 
-    wall_height = (data->map->grid_size * HEIGHT)/ ray->perp_len;
-    if (wall_height > HEIGHT)
-        wall_height = HEIGHT;
-    draw_start = HEIGHT / 2 - (wall_height / 2);
-    i = 0;
-    draw_end = wall_height + draw_start;
-    while (i < draw_start)
-    {
-        my_mlx_pixel_put(&(data->img2), col, i, data->map->ceiling_color);
-        i++;
-    }
-    //ratio = wall_height / data->map->no_text.height;
-    while (i < draw_end)
-    {
+    r = (int)(r * shading_factor);
+    g = (int)(g * shading_factor);
+    b = (int)(b * shading_factor);
+    //r = r > 255 ? 255 : (r < 0 ? 0 : r);
+    //g = g > 255 ? 255 : (g < 0 ? 0 : g);
+    //b = b > 255 ? 255 : (b < 0 ? 0 : b);
 
-        //current i is 
+    return (a << 24) | (r << 16) | (g << 8) | b;
+}
 
-    }
-    /*
-    while (i < draw_end)
+void    draw_slice(t_data *data, t_ray *ray, int slice)
+{
+    int     i;
+    int     color;
+    double  ratio;
+
+    i = ray->draw_start;
+    ratio = 1.0 * ray->text.width / ray->wall_height;
+    draw_ceiling_floor(data, ray, slice);
+    while (i < ray->draw_end)
     {
+        ray->text_y = (i - ray->draw_start) * ratio;
+        color = ray->text.pixel_array[ray->text_y + (ray->text.width * ray->text_x)];
         if (ray->wall == 1)
-            my_mlx_pixel_put(&(data->img2), col, i, RED);
-        else
-            my_mlx_pixel_put(&(data->img2), col, i, DARKER_RED);
+            color = apply_shading(color, 0.8);
+        my_mlx_pixel_put(&(data->img2), slice, i, color);
         i++;
     }
-    */
-    while (i < HEIGHT)
+}
+
+void    fill_tex_info(t_data *data, t_ray *ray)
+{
+    double  ratio;
+
+    if (ray->wall_height > HEIGHT)
+        ray->wall_height = HEIGHT;
+    ratio = fmod(ray->wall_intercept, data->map->grid_size) / data->map->grid_size;
+    ray->text_x = (int)(ratio * ray->text.width);
+    //you may want to flip. look at vicode get_text_coord function
+}
+
+void    fill_ray_info(t_data *data, t_ray *ray)
+{
+    ray->wall_height = (data->map->grid_size * HEIGHT)/ ray->perp_len;
+    if (ray->wall_height > HEIGHT)
+        ray->wall_height = HEIGHT;
+    ray->draw_start = HEIGHT / 2 - (ray->wall_height / 2);
+    ray->draw_end = ray->wall_height + ray->draw_start;
+    if (ray->wall == 1)
     {
-        my_mlx_pixel_put(&(data->img2), col, i, data->map->floor_color);
-        i++;
+        if (ray->dir.x > 0.0f)
+            ray->text = data->map->we_text;
+        else
+            ray->text = data->map->ea_text;
+        ray->wall_intercept = data->player->pos.y + (ray->len * ray->dir.y);
+    }
+    else
+    {
+        if (ray->dir.y > 0.0f)
+            ray->text = data->map->no_text;
+        else
+            ray->text = data->map->so_text;
+        ray->wall_intercept = data->player->pos.x + (ray->len * ray->dir.x);
     }
 }
 
 void    raycaster(t_data *data)
 {
-    t_dda   ray;
-    double  dirx;
-    double  diry;
+    t_ray   ray;
     double  angle;
     double  step;
     int     i;
@@ -101,12 +114,13 @@ void    raycaster(t_data *data)
     angle = -M_PI / 6;
     while (angle < M_PI / 6)
     {
-        dirx = data->player->dir.x * cos(angle) - data->player->dir.y * sin(angle);
-        diry = data->player->dir.x * sin(angle) + data->player->dir.y * cos(angle);
-        init_ray(&ray, data, dirx, diry);
+        ray.dir.x = data->player->dir.x * cos(angle) - data->player->dir.y * sin(angle);
+        ray.dir.y = data->player->dir.x * sin(angle) + data->player->dir.y * cos(angle);
         dda(data, &ray);
-        draw_col(data, &ray, i);
-        i++;
+        fill_ray_info(data, &ray);
+        fill_tex_info(data, &ray);
+        draw_slice(data, &ray, i);
+        i++;   
         angle += step;
     }
 }

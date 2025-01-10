@@ -24,6 +24,32 @@ int repetition(t_map *map, char *orientation)
 	return (0);
 }
 
+void	set_text(t_map *map, char *path, char *orientation)
+{
+	if (ft_strcmp(orientation, "NO") == 0)
+	{
+		map->no_text.path = path;
+		map->no_text.type = 'N';
+	}
+	else if (ft_strcmp(orientation, "SO") == 0)
+	{
+		map->so_text.path = path;
+		map->so_text.type = 'S';
+	}
+	else if (ft_strcmp(orientation, "WE") == 0)
+	{
+		map->we_text.path = path;
+		map->we_text.type = 'W';
+	}
+	else if (ft_strcmp(orientation, "EA") == 0)
+	{
+		map->ea_text.path = path;
+		map->ea_text.type = 'E';
+	}
+	else
+		free(path);
+}
+
 int	texture_parser(t_map *map, char *orientation, char *path)
 {
 	char *new_path;
@@ -39,16 +65,8 @@ int	texture_parser(t_map *map, char *orientation, char *path)
 	new_path = ft_strdup(path);
 	if (new_path == NULL)
 		return (-1);
-	if (ft_strcmp(orientation, "NO") == 0)
-		map->no_text.path = new_path;
-	else if (ft_strcmp(orientation, "SO") == 0)
-		map->so_text.path = new_path;
-	else if (ft_strcmp(orientation, "WE") == 0)
-		map->we_text.path = new_path;
-	else if (ft_strcmp(orientation, "EA") == 0)
-		map->ea_text.path = new_path;
-	else
-		free(new_path);
+	set_text(map, new_path, orientation);
+	printf("%d", map->info);
 	map->info++;
 	return (0);
 }

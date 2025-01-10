@@ -58,6 +58,14 @@
 # define KEY_S 1
 # define KEY_D 2
 
+typedef struct s_img
+{
+	void	*img_ptr;
+	char	*pixel_ptr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
 
 typedef struct	s_mat_pos
 {
@@ -80,10 +88,12 @@ typedef struct	s_grid
 
 typedef struct s_text
 {
-	void	*img;
+	t_img	img;
+	char	type;
 	char	*path;
 	int		width;
 	int		height;
+	int		*pixel_array;
 }	t_text;
 
 typedef struct s_map
@@ -98,7 +108,7 @@ typedef struct s_map
 	int			grid_size;
 	int			info;
 }	t_map;
-
+           
 typedef	struct s_player
 {
 	t_pos		pos;
@@ -113,15 +123,6 @@ typedef	struct s_player
 	int			moving_back;
 	double		radius;
 }	t_player;
-
-typedef struct s_img
-{
-	void	*img_ptr;
-	char	*pixel_ptr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_img;
 
 typedef struct s_data
 {
@@ -139,20 +140,28 @@ typedef struct s_dda
 {
     int     x;
     int     y;
-	int		wall;
-	double	dir_x;
-	double	dir_y;
     double  inc_x;
     double  inc_y;
     double  delta_x;
     double  delta_y;
     double  len_x;
     double  len_y;
+}   t_dda;
+
+typedef struct s_ray
+{
+	t_pos	dir;
 	double	len;
 	double	perp_len;
-	int		tex_x;
-	int		tex_y;
-}   t_dda;
+	int		wall;
+	double	wall_intercept;
+	int		wall_height;
+	int		draw_start;
+	int		draw_end;
+	t_text	text;
+	int		text_x;
+	int		text_y;
+}	t_ray;
 
 /*get_next_line*/
 char	*get_next_line(int fd);
@@ -162,6 +171,7 @@ void	*free_map(t_map *map);
 void	*free_data(t_data *data);
 void	*free_array_of_pointers(void **array);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+int		mlx_get_color(t_img *img, int x, int y);
 
 /*parsing*/
 int		ft_strcmp(char *s1, char *s2);
@@ -202,5 +212,5 @@ void	mlx_draw_line(t_data *data, t_player *player, int color);
 
 void    raycaster(t_data *data);
 void	castRay(t_data *data, t_player *player);
-void  dda(t_data *data, t_dda *dda);
+void  dda(t_data *data, t_ray *ray);
 #endif

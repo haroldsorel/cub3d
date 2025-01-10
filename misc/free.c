@@ -34,6 +34,10 @@ void	*free_map(t_map *map)
 	free(map->so_text.path);
 	free(map->we_text.path);
 	free(map->ea_text.path);
+	free(map->no_text.pixel_array);
+	free(map->so_text.pixel_array);
+	free(map->we_text.pixel_array);
+	free(map->ea_text.pixel_array);
 	free_array_of_pointers((void **)map->matrix);
 	//free mlx stuff
 	return (NULL);
