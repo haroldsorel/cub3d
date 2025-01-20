@@ -65,20 +65,12 @@ void    dda(t_data *data, t_ray *ray)
     {
         if (dda.len_x < dda.len_y)
         {
-            if (ray->dir.x > 0.0f)
-                my_mlx_pixel_put(&(data->img), (dda.x + 1) * data->map->grid_size, data->player->pos.y + (dda.len_x * ray->dir.y), GREEN);
-            else
-                my_mlx_pixel_put(&(data->img), dda.x * data->map->grid_size, data->player->pos.y + (dda.len_x * ray->dir.y), GREEN);
             dda.x += dda.inc_x;
             dda.len_x += dda.delta_x;
             wall = 1;
         }
         else
         {
-            if (ray->dir.y > 0.0f)
-                my_mlx_pixel_put(&(data->img), data->player->pos.x + (dda.len_y * ray->dir.x),  (dda.y + 1) * data->map->grid_size, GREEN);
-            else
-                my_mlx_pixel_put(&(data->img), data->player->pos.x + (dda.len_y * ray->dir.x),  dda.y * data->map->grid_size, GREEN);
             dda.y += dda.inc_y;
             dda.len_y += dda.delta_y;
             wall = 0;

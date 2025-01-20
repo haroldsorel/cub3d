@@ -28,7 +28,7 @@ void    calculate_grid_size(t_data *data)
     while ((data->map->matrix)[0][i] != '\0')
         i++;
     map_width = i;
-    ppg_width = WIDTH / 2 / map_width; 
+    ppg_width = WIDTH / map_width; 
     if (ppg_height < ppg_width)
         data->map->grid_size= ppg_height;
     else

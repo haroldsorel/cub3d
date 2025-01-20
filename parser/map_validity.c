@@ -99,7 +99,7 @@ int	is_valid_map(char **map)
 		while (map[i][j] != '\0')
 		{
 			if (ft_strchr(" 10NWES", map[i][j]) == NULL)
-				return (0);
+				return (ft_putstr_fd("File Error : Unknown Character\n", 2), 0);
 			if (ft_strchr("NWES", map[i][j]) != NULL)
 				player_present++;
 			j++;

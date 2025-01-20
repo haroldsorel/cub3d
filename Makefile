@@ -19,12 +19,9 @@ SRCS =	main.c \
 		parser/map_validity.c \
 		events/handle_keys.c \
 		events/handle_loops.c \
-		events/handle_mouse.c \
 		events/handle_movement.c \
 		events/handle_rotation.c \
 		events/move.c \
-		minimap/render_map.c \
-		minimap/minimap_loop.c \
 		raycaster/raycaster.c \
 		raycaster/dda.c
 

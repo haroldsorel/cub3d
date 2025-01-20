@@ -22,7 +22,7 @@ void    draw_ceiling_floor(t_data *data, t_ray *ray, int slice)
         i++;
     }
     i = ray->draw_end;
-    while (i < HEIGHT)
+    while (i < HEIGHT - 1)
     {
         my_mlx_pixel_put(&(data->img2), slice, i, data->map->floor_color);
         i++;
@@ -53,8 +53,8 @@ void    draw_slice(t_data *data, t_ray *ray, int slice)
     i = ray->draw_start;
     ratio = 1.0 * ray->text.width / ray->wall_height;
     offset = 0;
-    if (ray->wall_height > HEIGHT)
-        offset = (ray->wall_height - HEIGHT) / 2;
+    if (ray->wall_height > HEIGHT - 1)
+        offset = (ray->wall_height - (HEIGHT - 1)) / 2;
     draw_ceiling_floor(data, ray, slice);
     while (i < ray->draw_end)
     {
@@ -83,8 +83,8 @@ void    fill_ray_info(t_data *data, t_ray *ray)
     if (ray->draw_start < 0)
         ray->draw_start = 0;
     ray->draw_end = ray->wall_height + ray->draw_start;
-    if (ray->draw_end > HEIGHT)
-        ray->draw_end = HEIGHT;
+    if (ray->draw_end > HEIGHT - 1)
+        ray->draw_end = HEIGHT - 1;
     if (ray->wall == 1)
     {
         if (ray->dir.x > 0.0f)
@@ -111,7 +111,7 @@ void    raycaster(t_data *data)
     int     i;
 
     i = 0;
-    step = FOV / (WIDTH / 2);
+    step = FOV / WIDTH;
     angle = -M_PI / 6;
     while (angle < M_PI / 6)
     {

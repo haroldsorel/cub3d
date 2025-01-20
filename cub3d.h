@@ -21,12 +21,12 @@
 # include "libft/libft.h"
 # include "mlx/mlx.h"
 
-# define WIDTH 1400
-# define HEIGHT 850
+# define WIDTH 1000
+# define HEIGHT 1000
 # define FOV (M_PI / 3)
 
-#define SPEED 3
-#define RSPEED 0.05
+#define SPEED 0.1
+#define RSPEED 0.06
 
 /*	color constants	*/
 # define RED 0x00FF0000
@@ -122,6 +122,7 @@ typedef	struct s_player
 	int			moving_forward;
 	int			moving_back;
 	double		radius;
+	double		speed;
 }	t_player;
 
 typedef struct s_data
@@ -130,7 +131,6 @@ typedef struct s_data
 	t_player	*player;
 	void		*mlx;
 	void		*mlx_win;
-	t_img		img;
 	t_img		img2;
 	int			width;
 	int			height;
@@ -196,21 +196,14 @@ void	handle_stop_rotation(int key, t_data *data);
 void	handle_movement(int key, t_data *data);
 void	handle_stop_movement(int key, t_data *data);
 void	rotate(t_data *data, double rad);
-void    move(t_data *data, int key, int distance);
+void    move(t_data *data, int key, double distance);
 int		game_loop(t_data *data);
-int		minimap_loop(t_data *data);
-void	update_player_pos(t_data *data, int color);
 
 int		is_valid_map(char **map);
 
 /*render minimap*/
 void    render_minimap(t_data *data);
 
-void    mlx_draw_square(t_data *data, int x, int y, int color);
-void    mlx_draw_circle(t_data *data, t_player *player, int color);
-void	mlx_draw_line(t_data *data, t_player *player, int color);
-
 void    raycaster(t_data *data);
-void	castRay(t_data *data, t_player *player);
-void  dda(t_data *data, t_ray *ray);
+void	dda(t_data *data, t_ray *ray);
 #endif

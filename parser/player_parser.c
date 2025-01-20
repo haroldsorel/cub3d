@@ -51,8 +51,8 @@ static void	init_player_position(char **map, t_player *player, int offset)
 			{
 				player->mat_pos.x = j;
 				player->mat_pos.y = i;
-				player->pos.x = j * offset;
-				player->pos.y = i * offset;
+				player->pos.x = j * offset + player->radius;
+				player->pos.y = i * offset + player->radius;
 				player->starting_dir = map[i][j];
 				map[i][j] = '0';
 			}
@@ -64,7 +64,9 @@ static void	init_player_position(char **map, t_player *player, int offset)
 
 void	player_parser(t_data *data)
 {
+	data->player->radius = 0.2f * (data->map->grid_size / 2);
 	init_player_position(data->map->matrix, data->player, data->map->grid_size);
 	init_player_direction(data->player, data->player->starting_dir);
-	data->player->radius = 0.2f * (data->map->grid_size / 2);
+	data->player->speed = SPEED * data->map->grid_size;
+	printf("%f\n", data->player->speed);
 }

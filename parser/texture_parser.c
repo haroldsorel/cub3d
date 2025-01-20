@@ -66,7 +66,6 @@ int	texture_parser(t_map *map, char *orientation, char *path)
 	if (new_path == NULL)
 		return (-1);
 	set_text(map, new_path, orientation);
-	printf("%d", map->info);
 	map->info++;
 	return (0);
 }

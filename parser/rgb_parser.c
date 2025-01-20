@@ -28,7 +28,7 @@ static int	create_rgb(int r, int g, int b)
     return (r << 16 | g << 8 | b);
 }
 
-static int	repetion(t_map *map, char *type)
+static int	repetition(t_map *map, char *type)
 {
 	if (ft_strcmp(type, "C") == 0 && map->ceiling_color != -1)
 		return (ft_putstr_fd("File Error: Duplicate C Color\n", 2), 1);
@@ -43,7 +43,7 @@ int	rgb_parser(t_map *map, char *type, char *str)
 	int			int_rgb[3];
 	int			i;
 
-	if (repetion(map, type) == 1)
+	if (repetition(map, type) == 1)
 		return (-1);
 	i = 0;
 	rgb = ft_split(str, ',');

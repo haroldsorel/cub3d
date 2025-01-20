@@ -11,36 +11,10 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
-void	print_data_info(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	printf("\n\nno_text :		%s size : %d x %d\n", data->map->no_text.path, data->map->no_text.width, data->map->no_text.height);
-	printf("so_text :		%s\n", data->map->so_text.path);
-	printf("we_text :		%s\n", data->map->we_text.path);
-	printf("ea_text :		%s\n", data->map->ea_text.path);
-	printf("floor color : 		%d\n", data->map->floor_color);
-	printf("ceiling color : 	%d\n", data->map->ceiling_color);
-	printf("info :			%d\n\n", data->map->info);
-	while ((data->map->matrix)[i] != NULL)
-	{
-		printf("%s|\n", (data->map->matrix)[i]);
-		i++;
-	}
-	printf("Player x position : %f\n", data->player->pos.x);
-	printf("Player y position : %f\n", data->player->pos.y);
-	printf("Player x matrix position : %d\n", data->player->mat_pos.x);
-	printf("Player y matrix position : %d\n", data->player->mat_pos.y);
-	printf("Player radius size : %f\n", data->player->radius);
-	printf("grid size : %d\n", data->map->grid_size);
-}
-
 void	init_hooks(t_data *data)
 {
 	mlx_hook(data->mlx_win, 2, 0, handle_keys, data);
 	mlx_hook(data->mlx_win, 3, 0, handle_rkeys, data);
-	//mlx_hook(data->mlx_win, 4, 0, mouse_down_handle, data);
 	mlx_hook(data->mlx_win, 17, 0, handle_destroy, data);
 	mlx_loop_hook(data->mlx, game_loop, data);
 }
@@ -110,21 +84,15 @@ int	minilibx_init(t_data *data)
 	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
 	if (data->mlx_win == NULL)
 		return (-1);
-	data->img.img_ptr = mlx_new_image(data->mlx, WIDTH / 2, HEIGHT);
-	if (data->img.img_ptr == NULL)
-		return (-1);
-	data->img2.img_ptr = mlx_new_image(data->mlx, WIDTH / 2, HEIGHT);
+	data->img2.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (data->img2.img_ptr == NULL)
 		return (-1);
-	data->img.pixel_ptr = mlx_get_data_addr(data->img.img_ptr,
-			&(data->img.bpp), &(data->img.line_len), &(data->img.endian)); //bbp=32 linelen=7680 and endian=0
 	data->img2.pixel_ptr = mlx_get_data_addr(data->img2.img_ptr,
-			&(data->img2.bpp), &(data->img2.line_len), &(data->img2.endian)); //bbp=32 linelen=7680 and endian=0
+			&(data->img2.bpp), &(data->img2.line_len), &(data->img2.endian));
 	if (init_textures(data, data->map) == -1)
 		return (-1);
-	print_data_info(data);
 	init_hooks(data);
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img_ptr, 0, 0);
+	//mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img_ptr, 0, 0);
 	return (0);
 }
 
