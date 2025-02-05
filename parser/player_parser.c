@@ -68,5 +68,4 @@ void	player_parser(t_data *data)
 	init_player_position(data->map->matrix, data->player, data->map->grid_size);
 	init_player_direction(data->player, data->player->starting_dir);
 	data->player->speed = SPEED * data->map->grid_size;
-	printf("%f\n", data->player->speed);
 }
