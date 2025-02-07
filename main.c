@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haroldsorel <marvin@42.fr>                 +#+  +:+       +#+        */
+/*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:46:53 by haroldsorel       #+#    #+#             */
-/*   Updated: 2024/12/10 17:46:55 by haroldsorel      ###   ########.fr       */
+/*   Updated: 2025/02/07 14:16:32 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "cub3d.h"
+
 
 void	init_hooks(t_data *data)
 {
@@ -49,28 +49,40 @@ int	init_pixel_array(t_text *text)
 
 int	init_textures(t_data *data, t_map *map)
 {
-	map->no_text.img.img_ptr = mlx_png_file_to_image(data->mlx, map->no_text.path, &(map->no_text.width), &(map->no_text.height));
+	map->no_text.img.img_ptr = mlx_png_file_to_image(data->mlx, \
+	map->no_text.path, &(map->no_text.width), &(map->no_text.height));
 	if (map->no_text.img.img_ptr == NULL)
 		return (-1);
-	map->no_text.img.pixel_ptr = mlx_get_data_addr(map->no_text.img.img_ptr, &(map->no_text.img.bpp), &(map->no_text.img.line_len), &(map->no_text.img.endian));
+	map->no_text.img.pixel_ptr = mlx_get_data_addr(map->no_text.img.img_ptr, \
+		&(map->no_text.img.bpp), &(map->no_text.img.line_len), \
+		(map->no_text.img.endian));
 	if (init_pixel_array(&(map->no_text)) == -1)
 		return (-1);
-	map->so_text.img.img_ptr = mlx_png_file_to_image(data->mlx, map->so_text.path, &(map->so_text.width), &(map->so_text.height));
+	map->so_text.img.img_ptr = mlx_png_file_to_image(data->mlx, \
+	map->so_text.path, &(map->so_text.width), &(map->so_text.height));
 	if (map->so_text.img.img_ptr == NULL)
 		return (-1);
-	map->so_text.img.pixel_ptr = mlx_get_data_addr(map->so_text.img.img_ptr, &(map->so_text.img.bpp), &(map->so_text.img.line_len), &(map->so_text.img.endian));
+	map->so_text.img.pixel_ptr = mlx_get_data_addr(map->so_text.img.img_ptr, \
+		&(map->so_text.img.bpp), &(map->so_text.img.line_len), \
+		&(map->so_text.img.endian));
 	if (init_pixel_array(&(map->so_text)) == -1)
 		return (-1);
-	map->we_text.img.img_ptr = mlx_png_file_to_image(data->mlx, map->we_text.path, &(map->we_text.width), &(map->we_text.height));
+	map->we_text.img.img_ptr = mlx_png_file_to_image(data->mlx, \
+		map->we_text.path, &(map->we_text.width), &(map->we_text.height));
 	if (map->we_text.img.img_ptr == NULL)
 		return (-1);
-	map->we_text.img.pixel_ptr = mlx_get_data_addr(map->we_text.img.img_ptr, &(map->we_text.img.bpp), &(map->we_text.img.line_len), &(map->we_text.img.endian));
+	map->we_text.img.pixel_ptr = mlx_get_data_addr(map->we_text.img.img_ptr, \
+		&(map->we_text.img.bpp), &(map->we_text.img.line_len), \
+		&(map->we_text.img.endian));
 	if (init_pixel_array(&(map->we_text)) == -1)
 		return (-1);
-	map->ea_text.img.img_ptr = mlx_png_file_to_image(data->mlx, map->ea_text.path, &(map->ea_text.width), &(map->ea_text.height));
+	map->ea_text.img.img_ptr = mlx_png_file_to_image(data->mlx, \
+		map->ea_text.path, &(map->ea_text.width), &(map->ea_text.height));
 	if (map->ea_text.img.img_ptr == NULL)
 		return (-1);
-	map->ea_text.img.pixel_ptr = mlx_get_data_addr(map->ea_text.img.img_ptr, &(map->ea_text.img.bpp), &(map->ea_text.img.line_len), &(map->ea_text.img.endian));
+	map->ea_text.img.pixel_ptr = mlx_get_data_addr(map->ea_text.img.img_ptr, \
+		&(map->ea_text.img.bpp), &(map->ea_text.img.line_len), \
+		&(map->ea_text.img.endian));
 	if (init_pixel_array(&(map->ea_text)) == -1)
 		return (-1);
 	return (0);
@@ -92,11 +104,11 @@ int	minilibx_init(t_data *data)
 	if (init_textures(data, data->map) == -1)
 		return (-1);
 	init_hooks(data);
-	//mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img_ptr, 0, 0);
+	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img_ptr, 0, 0);
 	return (0);
 }
 
-void	init_structures(t_data *data, t_map *map, t_player *player) 
+void	init_structures(t_data *data, t_map *map, t_player *player)
 {
 	player->pos.x = 0;
 	player->pos.y = 0;
@@ -128,8 +140,6 @@ void	init_structures(t_data *data, t_map *map, t_player *player)
 	data->map = map;
 	data->map->grid_size = 0;
 }
-
-
 
 int	main(int argc, char **argv)
 {

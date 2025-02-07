@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsorel <hsorel@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:24:37 by hsorel            #+#    #+#             */
-/*   Updated: 2024/12/12 16:24:49 by hsorel           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:48:09 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "cub3d.h"
 
 void	handle_escape(t_data *data)
 {

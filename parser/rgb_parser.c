@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   rgb_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsorel <hsorel@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:30:58 by hsorel            #+#    #+#             */
-/*   Updated: 2024/12/11 16:30:59 by hsorel           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:46:34 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "cub3d.h"
 
 static int	create_rgb(int r, int g, int b)
 {
@@ -25,7 +24,7 @@ static int	create_rgb(int r, int g, int b)
 		b = 255;
 	else if (b < 0)
 		b = 0;
-    return (r << 16 | g << 8 | b);
+	return (r << 16 | g << 8 | b);
 }
 
 static int	repetition(t_map *map, char *type)

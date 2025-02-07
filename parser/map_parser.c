@@ -3,36 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsorel <hsorel@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:30:52 by hsorel            #+#    #+#             */
-/*   Updated: 2024/12/11 16:30:54 by hsorel           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:45:36 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "cub3d.h"
 
-void    calculate_grid_size(t_data *data)
+void	calculate_grid_size(t_data *data)
 {
-    int map_height;
-    int map_width;
-    int ppg_height;
-    int ppg_width;
-    int i;
+	int	map_height;
+	int	map_width;
+	int	ppg_height;
+	int	ppg_width;
+	int	i;
 
-    i = 0;
-    while ((data->map->matrix)[i] != NULL)
-        i++;
-    map_height = i;
-    ppg_height = HEIGHT / map_height;
-    i = 0;
-    while ((data->map->matrix)[0][i] != '\0')
-        i++;
-    map_width = i;
-    ppg_width = WIDTH / map_width; 
-    if (ppg_height < ppg_width)
-        data->map->grid_size= ppg_height;
-    else
-        data->map->grid_size = ppg_width;
+	i = 0;
+	while ((data->map->matrix)[i] != NULL)
+		i++;
+	map_height = i;
+	ppg_height = HEIGHT / map_height;
+	i = 0;
+	while ((data->map->matrix)[0][i] != '\0')
+		i++;
+	map_width = i;
+	ppg_width = WIDTH / map_width;
+	if (ppg_height < ppg_width)
+		data->map->grid_size = ppg_height;
+	else
+		data->map->grid_size = ppg_width;
 }
 
 char	*replace_word(char *word, int len)

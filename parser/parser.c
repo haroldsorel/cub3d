@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsorel <hsorel@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:32:21 by hsorel            #+#    #+#             */
-/*   Updated: 2024/12/11 16:32:26 by hsorel           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:45:53 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "cub3d.h"
 
 int	valid_input(t_data *data, char **elem)
 {
@@ -39,10 +38,8 @@ int	parse_elements(t_data *data, char **elem)
 
 int	extract_info(t_data *data, char *line)
 {
-	//int		i;
 	char	**elem;
 
-	//i = 0;
 	if (line[0] == '\n' || line[0] == '\0')
 		return (1);
 	no_other_ws(line);

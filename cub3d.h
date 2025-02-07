@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haroldsorel <marvin@42.fr>                 +#+  +:+       +#+        */
+/*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:25:52 by haroldsorel       #+#    #+#             */
-/*   Updated: 2024/12/10 17:25:59 by haroldsorel      ###   ########.fr       */
+/*   Updated: 2025/02/07 14:48:45 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -25,8 +26,8 @@
 # define HEIGHT 1000
 # define FOV (M_PI / 3)
 
-#define SPEED 0.1
-#define RSPEED 0.06
+# define SPEED 0.1
+# define RSPEED 0.06
 
 /*	color constants	*/
 # define RED 0x00FF0000
@@ -67,20 +68,19 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct	s_mat_pos
+typedef struct s_mat_pos
 {
 	int	x;
 	int	y;
-}
-	t_mat_pos;
+}	t_mat_pos;
 
-typedef struct	s_pos
+typedef struct s_pos
 {
 	double	x;
 	double	y;
 }	t_pos;
 
-typedef struct	s_grid
+typedef struct s_grid
 {
 	int	x;
 	int	y;
@@ -108,8 +108,8 @@ typedef struct s_map
 	int			grid_size;
 	int			info;
 }	t_map;
-           
-typedef	struct s_player
+
+typedef struct s_player
 {
 	t_pos		pos;
 	t_pos		dir;
@@ -138,15 +138,15 @@ typedef struct s_data
 
 typedef struct s_dda
 {
-    int     x;
-    int     y;
-    double  inc_x;
-    double  inc_y;
-    double  delta_x;
-    double  delta_y;
-    double  len_x;
-    double  len_y;
-}   t_dda;
+	int		x;
+	int		y;
+	double	inc_x;
+	double	inc_y;
+	double	delta_x;
+	double	delta_y;
+	double	len_x;
+	double	len_y;
+}	t_dda;
 
 typedef struct s_ray
 {
@@ -196,14 +196,15 @@ void	handle_stop_rotation(int key, t_data *data);
 void	handle_movement(int key, t_data *data);
 void	handle_stop_movement(int key, t_data *data);
 void	rotate(t_data *data, double rad);
-void    move(t_data *data, int key, double distance);
+void	move(t_data *data, int key, double distance);
 int		game_loop(t_data *data);
 
 int		is_valid_map(char **map);
 
 /*render minimap*/
-void    render_minimap(t_data *data);
+void	render_minimap(t_data *data);
 
-void    raycaster(t_data *data);
+void	raycaster(t_data *data);
 void	dda(t_data *data, t_ray *ray);
+
 #endif

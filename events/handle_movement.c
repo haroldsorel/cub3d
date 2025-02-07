@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   handle_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsorel <hsorel@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:43:25 by hsorel            #+#    #+#             */
-/*   Updated: 2024/12/12 16:43:38 by hsorel           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:48:14 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "cub3d.h"
 
 void	handle_movement(int key, t_data *data)
 {

@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haroldsorel <marvin@42.fr>                 +#+  +:+       +#+        */
+/*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:29:08 by haroldsorel       #+#    #+#             */
-/*   Updated: 2024/12/10 18:29:09 by haroldsorel      ###   ########.fr       */
+/*   Updated: 2025/02/07 14:46:16 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "cub3d.h"
 
 void	*free_array_of_pointers(void **array)
 {

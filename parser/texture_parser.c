@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   texture_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsorel <hsorel@student.s19.be>             +#+  +:+       +#+        */
+/*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:31:04 by hsorel            #+#    #+#             */
-/*   Updated: 2024/12/11 16:31:05 by hsorel           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:46:05 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "cub3d.h"
 
-int repetition(t_map *map, char *orientation)
+int	repetition(t_map *map, char *orientation)
 {
 	if (ft_strcmp(orientation, "NO") == 0 && map->no_text.path != NULL)
 		return (ft_putstr_fd("File Error: Duplicate NO Texture\n", 2), 1);
@@ -52,14 +51,14 @@ void	set_text(t_map *map, char *path, char *orientation)
 
 int	texture_parser(t_map *map, char *orientation, char *path)
 {
-	char *new_path;
+	char	*new_path;
 
 	if (repetition(map, orientation) == 1)
 		return (-1);
-	if (access(path, F_OK) == -1) 
+	if (access(path, F_OK) == -1)
 	{
-        ft_putstr_fd("File Error: File Not Found: ", 2);
-        ft_putendl_fd(path, 2);
+		ft_putstr_fd("File Error: File Not Found: ", 2);
+		ft_putendl_fd(path, 2);
 		return (-1);
 	}
 	new_path = ft_strdup(path);
