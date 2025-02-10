@@ -10,6 +10,7 @@ SRCS =	main.c \
 		get_next_line/get_next_line.c \
 		misc/free.c \
 		misc/mlx_utils.c \
+		misc/init_structs.c \
 		parser/parser.c \
 		parser/rgb_parser.c \
 		parser/map_parser.c \
