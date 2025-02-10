@@ -1,0 +1,5 @@
+*.o
+*/*.o
+cub3d
+mlx/libmlx.a
+libft/libft.a
