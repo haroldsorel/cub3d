@@ -6,9 +6,11 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:43:54 by hsorel            #+#    #+#             */
-/*   Updated: 2025/02/07 14:48:16 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:11:30 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3d.h"
 
 void	rotate(t_data *data, double rad)
 {

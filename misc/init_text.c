@@ -12,6 +12,34 @@
 
 #include "cub3d.h"
 
+int	init_pixel_array(t_text *text)
+{
+	int	*array;
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	array = malloc(text->height * text->width * sizeof(int));
+	if (array == NULL)
+		return (-1);
+	while (i < text->width)
+	{
+		j = 0;
+		while (j < text->height)
+		{
+			array[k] = mlx_get_color(&(text->img), i, j);
+			k++;
+			j++;
+		}
+		i++;
+	}
+	text->pixel_array = array;
+	return (0);
+}
+
 int	init_no_text(t_data *data, t_map *map)
 {
 	map->no_text.img.img_ptr = mlx_png_file_to_image(data->mlx, \
@@ -20,7 +48,7 @@ int	init_no_text(t_data *data, t_map *map)
 		return (-1);
 	map->no_text.img.pixel_ptr = mlx_get_data_addr(map->no_text.img.img_ptr, \
 		&(map->no_text.img.bpp), &(map->no_text.img.line_len), \
-		(map->no_text.img.endian));
+		&(map->no_text.img.endian));
 	if (init_pixel_array(&(map->no_text)) == -1)
 		return (-1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:25:52 by haroldsorel       #+#    #+#             */
-/*   Updated: 2025/02/10 13:54:22 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:17:16 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,9 @@ int		is_valid_map(char **map);
 /*render minimap*/
 void	render_minimap(t_data *data);
 
+/*raycaster*/
 void	raycaster(t_data *data);
 void	dda(t_data *data, t_ray *ray);
+void	draw_slice(t_data *data, t_ray *ray, int slice);
 
 #endif

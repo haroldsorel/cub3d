@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 14:23:33 by haroldsorel       #+#    #+#             */
-/*   Updated: 2025/02/10 13:52:48 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:05:00 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,25 @@ void	init_dda(t_data *data, t_dda *dda, t_ray *ray)
 	dda->x = (int)(data->player->pos.x / data->map->grid_size);
 	dda->delta_x = fabs(data->map->grid_size / ray->dir.x);
 	dda->delta_y = fabs(data->map->grid_size / ray->dir.y);
+	dda->inc_x = -1;
 	if (ray->dir.x < 0.0f)
-	{
-		dda->inc_x = -1;
-		dda->len_x = fabs((data->player->pos.x - (dda->x * data->map->grid_size)) / ray->dir.x);
-	}
+		dda->len_x = fabs((data->player->pos.x - \
+			(dda->x * data->map->grid_size)) / ray->dir.x);
 	else
 	{
 		dda->inc_x = 1;
-		dda->len_x = fabs((((dda->x + 1) * data->map->grid_size) - data->player->pos.x) / ray->dir.x);
+		dda->len_x = fabs((((dda->x + 1) * data->map->grid_size) - \
+			data->player->pos.x) / ray->dir.x);
 	}
+	dda->inc_y = -1;
 	if (ray->dir.y < 0.0f)
-	{
-		dda->inc_y = -1;
-		dda->len_y = fabs((data->player->pos.y - (dda->y * data->map->grid_size)) / ray->dir.y);
-	}
+		dda->len_y = fabs((data->player->pos.y - \
+			(dda->y * data->map->grid_size)) / ray->dir.y);
 	else
 	{
 		dda->inc_y = 1;
-		dda->len_y = fabs((((dda->y + 1) * data->map->grid_size) - data->player->pos.y) / ray->dir.y);
+		dda->len_y = fabs((((dda->y + 1) * data->map->grid_size) - \
+			data->player->pos.y) / ray->dir.y);
 	}
 }
 

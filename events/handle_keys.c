@@ -6,9 +6,11 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:24:37 by hsorel            #+#    #+#             */
-/*   Updated: 2025/02/07 14:48:09 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:11:21 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3d.h"
 
 void	handle_escape(t_data *data)
 {

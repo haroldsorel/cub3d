@@ -25,7 +25,8 @@ SRCS =	main.c \
 		events/handle_rotation.c \
 		events/move.c \
 		raycaster/raycaster.c \
-		raycaster/dda.c
+		raycaster/dda.c \
+		raycaster/draw_slice.c
 
 OBJS = $(SRCS:.c=.o)
 
