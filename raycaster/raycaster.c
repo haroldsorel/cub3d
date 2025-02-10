@@ -6,9 +6,11 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 00:53:38 by haroldsorel       #+#    #+#             */
-/*   Updated: 2025/02/07 14:44:57 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:52:51 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3d.h"
 
 void	draw_ceiling_floor(t_data *data, t_ray *ray, int slice)
 {

@@ -6,9 +6,11 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:34:39 by ade-beco          #+#    #+#             */
-/*   Updated: 2025/02/10 13:34:58 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:53:42 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3d.h"
 
 void	init_player_struct(t_player *player)
 {
@@ -40,7 +42,7 @@ void	init_map_struct(t_map *map)
 	map->info = 0;
 }
 
-void	init_data_struct(t_data *data)
+void	init_data_struct(t_data *data, t_map *map, t_player *player)
 {
 	data->height = HEIGHT;
 	data->width = WIDTH;

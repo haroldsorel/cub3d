@@ -6,9 +6,11 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:29:08 by haroldsorel       #+#    #+#             */
-/*   Updated: 2025/02/07 14:46:16 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:51:39 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3d.h"
 
 void	*free_array_of_pointers(void **array)
 {

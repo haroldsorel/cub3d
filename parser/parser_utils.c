@@ -6,9 +6,11 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:18:07 by hsorel            #+#    #+#             */
-/*   Updated: 2025/02/07 14:46:28 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:52:33 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3d.h"
 
 int	row_len(char **char_map)
 {

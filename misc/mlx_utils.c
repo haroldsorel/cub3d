@@ -6,10 +6,11 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:29:21 by haroldsorel       #+#    #+#             */
-/*   Updated: 2025/02/07 14:47:43 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:51:59 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
 
 int	mlx_get_color(t_img *img, int x, int y)
 {

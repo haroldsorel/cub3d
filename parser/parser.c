@@ -6,9 +6,11 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:32:21 by hsorel            #+#    #+#             */
-/*   Updated: 2025/02/07 14:45:53 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:52:36 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3d.h"
 
 int	valid_input(t_data *data, char **elem)
 {

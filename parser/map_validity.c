@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   map_validity.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haroldsorel <marvin@42.fr>                 +#+  +:+       +#+        */
+/*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 22:07:04 by haroldsorel       #+#    #+#             */
-/*   Updated: 2024/12/10 22:07:06 by haroldsorel      ###   ########.fr       */
+/*   Updated: 2025/02/10 13:52:30 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	valid_rows(char *line)

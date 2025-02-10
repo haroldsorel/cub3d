@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:25:52 by haroldsorel       #+#    #+#             */
-/*   Updated: 2025/02/10 13:35:50 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:54:22 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,11 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		mlx_get_color(t_img *img, int x, int y);
 void	init_player_struct(t_player *player);
 void	init_map_struct(t_map *map);
-void	init_data_struct(t_data *data);
+void	init_data_struct(t_data *data, t_map *map, t_player *player);
+int		init_no_text(t_data *data, t_map *map);
+int		init_so_text(t_data *data, t_map *map);
+int		init_we_text(t_data *data, t_map *map);
+int		init_ea_text(t_data *data, t_map *map);
 
 /*parsing*/
 int		ft_strcmp(char *s1, char *s2);
