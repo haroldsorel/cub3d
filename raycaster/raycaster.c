@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 00:53:38 by haroldsorel       #+#    #+#             */
-/*   Updated: 2025/02/10 14:12:56 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:52:23 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	fill_tex_info(t_data *data, t_ray *ray)
 	ratio = fmod(ray->wall_intercept, data->map->grid_size) / \
 		data->map->grid_size;
 	ray->text_x = (int)(ratio * ray->text.width);
-	//you may want to flip. look at vicode get_text_coord function
 }
 
 void	fill_ray_info(t_data *data, t_ray *ray)

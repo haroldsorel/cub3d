@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:29:08 by haroldsorel       #+#    #+#             */
-/*   Updated: 2025/02/10 13:51:39 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:52:27 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	*free_map(t_map *map)
 	free(map->we_text.pixel_array);
 	free(map->ea_text.pixel_array);
 	free_array_of_pointers((void **)map->matrix);
-	//free mlx stuff
 	return (NULL);
 }
 
