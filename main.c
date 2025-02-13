@@ -62,23 +62,23 @@ int	main(int argc, char **argv)
 	t_data		data;
 	t_map		map;
 	t_player	player;
-	int			fd;
 
 	if (argc != 2)
 		return (ft_putstr_fd("Error: Wrong Arguments\n", 2), 1);
 	if (check_file(argv[1]) == -1)
 		return (ft_putstr_fd("Error: Wrong File Extension\n", 2), 1);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	data.fd = open(argv[1], O_RDONLY);
+	if (data.fd == -1)
 		return (perror("Error"), 1);
 	init_player_struct(&player);
 	init_map_struct(&map);
 	init_data_struct(&data, &map, &player);
-	if (parser(&data, fd) == -1)
+	if (parser(&data, data.fd) == -1)
 		return (1);
 	if (minilibx_init(&data) == -1)
 		return (1);
 	mlx_loop(data.mlx);
 	free_data(&data);
+	close(data.fd);
 	return (0);
 }

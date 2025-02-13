@@ -54,5 +54,6 @@ void	*free_map(t_map *map)
 void	*free_data(t_data *data)
 {
 	free_map(data->map);
+	close(data->fd);
 	return (NULL);
 }

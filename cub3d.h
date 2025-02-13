@@ -127,6 +127,7 @@ typedef struct s_player
 
 typedef struct s_data
 {
+	int			fd;
 	t_map		*map;
 	t_player	*player;
 	void		*mlx;
