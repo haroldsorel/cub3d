@@ -31,14 +31,22 @@ void	*free_array_of_pointers(void **array)
 
 void	*free_map(t_map *map)
 {
-	free(map->no_text.path);
-	free(map->so_text.path);
-	free(map->we_text.path);
-	free(map->ea_text.path);
-	free(map->no_text.pixel_array);
-	free(map->so_text.pixel_array);
-	free(map->we_text.pixel_array);
-	free(map->ea_text.pixel_array);
+	if (map->no_text.path)
+		free(map->no_text.path);
+	if (map->so_text.path)
+		free(map->so_text.path);
+	if (map->ea_text.path)
+		free(map->ea_text.path);
+	if (map->we_text.path)
+		free(map->we_text.path);
+	if (map->no_text.pixel_array)
+		free(map->no_text.pixel_array);
+	if (map->so_text.pixel_array)
+		free(map->so_text.pixel_array);
+	if (map->ea_text.pixel_array)
+		free(map->ea_text.pixel_array);
+	if (map->we_text.pixel_array)
+		free(map->we_text.pixel_array);
 	free_array_of_pointers((void **)map->matrix);
 	return (NULL);
 }

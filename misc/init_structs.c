@@ -38,6 +38,10 @@ void	init_map_struct(t_map *map)
 	map->so_text.path = NULL;
 	map->we_text.path = NULL;
 	map->ea_text.path = NULL;
+	map->no_text.pixel_array = NULL;
+	map->so_text.pixel_array = NULL;
+	map->ea_text.pixel_array = NULL;
+	map->we_text.pixel_array = NULL;
 	map->matrix = NULL;
 	map->info = 0;
 }

@@ -1,6 +1,6 @@
 NAME = cub3d
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -I. -Ilibft -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -I. -Ilibft
 INCLUDES = cub3d.h
 mlx = mlx/libmlx.a
 libft = libft/libft.a
