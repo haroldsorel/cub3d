@@ -42,6 +42,21 @@ int	minilibx_init(t_data *data)
 	return (0);
 }
 
+int	check_file(char *str)
+{
+	int	i;
+
+	i = ft_strlen(str) - 1;
+	while (i >= 0 && str[i] != '.')
+		i--;
+	if (i == -1)
+		return (-1);
+	i++;
+	if (ft_strcmp(&(str[i]), "cub") != 0)
+		return (-1);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data		data;
@@ -49,8 +64,10 @@ int	main(int argc, char **argv)
 	t_player	player;
 	int			fd;
 
-	if (argc < 2)
-		return (ft_putstr_fd("Error: Enter a file name\n", 2), 1);
+	if (argc != 2)
+		return (ft_putstr_fd("Error: Wrong Arguments\n", 2), 1);
+	if (check_file(argv[1]) == -1)
+		return (ft_putstr_fd("Error: Wrong File Extension\n", 2), 1);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (perror("Error"), 1);
