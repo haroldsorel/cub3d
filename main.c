@@ -25,7 +25,7 @@ int	minilibx_init(t_data *data)
 	data->mlx = mlx_init();
 	if (data->mlx == NULL)
 		return (-1);
-	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
+	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3D");
 	if (data->mlx_win == NULL)
 		return (-1);
 	data->img2.img_ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
