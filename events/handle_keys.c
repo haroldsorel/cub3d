@@ -14,14 +14,14 @@
 
 void	handle_escape(t_data *data)
 {
-	ft_putstr_fd("Exiting Cub3d\n", 1);
+	ft_putstr_fd("Exiting cub3D\n", 1);
 	free_data(data);
 	exit(0);
 }
 
 int	handle_destroy(t_data *data)
 {
-	ft_putstr_fd("Exiting Cub3d\n", 1);
+	ft_putstr_fd("Exiting cub3D\n", 1);
 	free_data(data);
 	exit(0);
 }

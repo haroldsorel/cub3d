@@ -48,6 +48,7 @@ void	*free_map(t_map *map)
 	if (map->we_text.pixel_array)
 		free(map->we_text.pixel_array);
 	free_array_of_pointers((void **)map->matrix);
+	map->matrix = NULL;
 	return (NULL);
 }
 
