@@ -6,7 +6,7 @@
 /*   By: ade-beco <ade-beco@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:25:52 by haroldsorel       #+#    #+#             */
-/*   Updated: 2025/02/10 14:17:16 by ade-beco         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:05:15 by ade-beco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # define WIDTH 1000
 # define HEIGHT 1000
-# define FOV (M_PI / 3)
+# define FOV 1.047197551196597746154214461093
 
 # define SPEED 0.1
 # define RSPEED 0.06
