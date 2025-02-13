@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -I. -Ilibft
 INCLUDES = cub3d.h
