@@ -11,7 +11,7 @@
 # **************************************************************************** #
 NAME = cub3D
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -I. -Ilibft
+CFLAGS = -Wall -Wextra -Werror -I. -Ilibft
 INCLUDES = cub3d.h
 mlx = mlx/libmlx.a
 libft = libft/libft.a

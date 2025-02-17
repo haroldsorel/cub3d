@@ -40,6 +40,19 @@ static int	valid_rows(char *line)
 	return (1);
 }
 
+static int	col_error(char *line)
+{
+	if (line == NULL)
+	{
+		return (-1);
+	}
+	else
+	{
+		free(line);
+		return (0);
+	}
+}
+
 static int	valid_cols(char **map)
 {
 	int		i;
@@ -62,7 +75,7 @@ static int	valid_cols(char **map)
 			line[i] = '\0';
 		}
 		if (line == NULL || valid_rows(line) == 0)
-			return (free(line), 0);
+			return (col_error(line));
 		free(line);
 		j++;
 	}
@@ -82,6 +95,8 @@ static int	map_closed(char **map)
 	}
 	if (valid_cols(map) == 0)
 		return (0);
+	if (valid_cols(map) == -1)
+		return (-1);
 	return (1);
 }
 
@@ -92,7 +107,6 @@ int	is_valid_map(char **map)
 	int	player_present;
 
 	i = 0;
-	j = 0;
 	player_present = 0;
 	while (map[i] != NULL)
 	{
@@ -107,9 +121,9 @@ int	is_valid_map(char **map)
 		}
 		i++;
 	}
-	if (map_closed(map) == 0)
-		return (ft_putstr_fd("File Error : Invalid Map: Unclosed\n", 2), 0);
-	if (player_present != 1)
-		return (ft_putstr_fd("File Error : Invalid Map: No Player\n", 2), 0);
+	if (map_closed(map) == 0 || player_present != 1)
+		return (ft_putstr_fd("File Error : Invalid Map\n", 2), 0);
+	if (map_closed(map) == -1)
+		return (0);
 	return (1);
 }

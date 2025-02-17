@@ -76,7 +76,7 @@ int	main(int argc, char **argv)
 	if (parser(&data, data.fd) == -1)
 		return (1);
 	if (minilibx_init(&data) == -1)
-		return (1);
+		return (free_data(&data), 1);
 	mlx_loop(data.mlx);
 	free_data(&data);
 	close(data.fd);
