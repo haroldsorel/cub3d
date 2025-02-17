@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	repetition(t_map *map, char *orientation)
+static int	repetition(t_map *map, char *orientation)
 {
 	if (ft_strcmp(orientation, "NO") == 0 && map->no_text.path != NULL)
 		return (ft_putstr_fd("File Error: Duplicate NO Texture\n", 2), 1);
@@ -25,7 +25,7 @@ int	repetition(t_map *map, char *orientation)
 	return (0);
 }
 
-void	set_text(t_map *map, char *path, char *orientation)
+static void	set_text(t_map *map, char *path, char *orientation)
 {
 	if (ft_strcmp(orientation, "NO") == 0)
 	{

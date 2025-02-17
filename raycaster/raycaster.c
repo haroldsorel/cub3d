@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	fill_tex_info(t_data *data, t_ray *ray)
+static void	fill_tex_info(t_data *data, t_ray *ray)
 {
 	double	ratio;
 
@@ -21,7 +21,7 @@ void	fill_tex_info(t_data *data, t_ray *ray)
 	ray->text_x = (int)(ratio * ray->text.width);
 }
 
-void	fill_ray_info(t_data *data, t_ray *ray)
+static void	fill_ray_info(t_data *data, t_ray *ray)
 {
 	ray->wall_height = (data->map->grid_size * HEIGHT) / ray->perp_len;
 	ray->draw_start = HEIGHT / 2 - (ray->wall_height / 2);

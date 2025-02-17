@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	init_pixel_array(t_text *text)
+static int	init_pixel_array(t_text *text)
 {
 	int	*array;
 	int	i;

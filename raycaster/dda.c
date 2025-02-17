@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	init_dda(t_data *data, t_dda *dda, t_ray *ray)
+static void	init_dda(t_data *data, t_dda *dda, t_ray *ray)
 {
 	dda->y = (int)(data->player->pos.y / data->map->grid_size);
 	dda->x = (int)(data->player->pos.x / data->map->grid_size);

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	draw_ceiling_floor(t_data *data, t_ray *ray, int slice)
+static void	draw_ceiling_floor(t_data *data, t_ray *ray, int slice)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ void	draw_ceiling_floor(t_data *data, t_ray *ray, int slice)
 	}
 }
 
-int	apply_shading(int color, double factor)
+static int	apply_shading(int color, double factor)
 {
 	int	r;
 	int	g;

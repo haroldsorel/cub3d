@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	movement_loop(t_data *data)
+static void	movement_loop(t_data *data)
 {
 	if (data->player->moving_forward == 1)
 		move(data, 'w', data->player->speed);

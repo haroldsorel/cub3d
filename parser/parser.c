@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	valid_input(t_data *data, char **elem)
+static int	valid_input(t_data *data, char **elem)
 {
 	int	len;
 
@@ -25,7 +25,7 @@ int	valid_input(t_data *data, char **elem)
 	return (0);
 }
 
-int	parse_elements(t_data *data, char **elem)
+static int	parse_elements(t_data *data, char **elem)
 {
 	if (valid_input(data, elem) == -1)
 		return (ft_putstr_fd("File Error : Wrong Arguments\n", 2), -1);
@@ -38,7 +38,7 @@ int	parse_elements(t_data *data, char **elem)
 	return (-1);
 }
 
-int	extract_info(t_data *data, char *line)
+static int	extract_info(t_data *data, char *line)
 {
 	char	**elem;
 

@@ -36,7 +36,7 @@ void	calculate_grid_size(t_data *data)
 		data->map->grid_size = ppg_width;
 }
 
-char	*replace_word(char *word, int len)
+static char	*replace_word(char *word, int len)
 {
 	char	*new;
 	int		i;

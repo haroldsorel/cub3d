@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	init_hooks(t_data *data)
+static void	init_hooks(t_data *data)
 {
 	mlx_hook(data->mlx_win, 2, 0, handle_keys, data);
 	mlx_hook(data->mlx_win, 3, 0, handle_rkeys, data);
@@ -20,7 +20,7 @@ void	init_hooks(t_data *data)
 	mlx_loop_hook(data->mlx, game_loop, data);
 }
 
-int	minilibx_init(t_data *data)
+static int	minilibx_init(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (data->mlx == NULL)
@@ -42,7 +42,7 @@ int	minilibx_init(t_data *data)
 	return (0);
 }
 
-int	check_file(char *str)
+static int	check_file(char *str)
 {
 	int	i;
 

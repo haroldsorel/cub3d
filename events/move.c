@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	move_forward(t_data *data, double distance)
+static void	move_forward(t_data *data, double distance)
 {
 	double	new_pos_x;
 	double	new_pos_y;
@@ -31,7 +31,7 @@ void	move_forward(t_data *data, double distance)
 		data->player->pos.y = new_pos_y;
 }
 
-void	move_backward(t_data *data, double distance)
+static void	move_backward(t_data *data, double distance)
 {
 	double	new_pos_x;
 	double	new_pos_y;
@@ -50,7 +50,7 @@ void	move_backward(t_data *data, double distance)
 		data->player->pos.y = new_pos_y;
 }
 
-void	move_right(t_data *data, double distance)
+static void	move_right(t_data *data, double distance)
 {
 	double	new_pos_x;
 	double	new_pos_y;
@@ -69,7 +69,7 @@ void	move_right(t_data *data, double distance)
 		data->player->pos.y = new_pos_y;
 }
 
-void	move_left(t_data *data, double distance)
+static void	move_left(t_data *data, double distance)
 {
 	double	new_pos_x;
 	double	new_pos_y;
