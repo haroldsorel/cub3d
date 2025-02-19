@@ -114,7 +114,7 @@ int	is_valid_map(char **map)
 		while (map[i][j] != '\0')
 		{
 			if (ft_strchr(" 10NWES", map[i][j]) == NULL)
-				return (ft_putstr_fd("File Error : Unknown Character\n", 2), 0);
+				return (ft_putstr_fd("Error\nUnknown Character\n", 2), 0);
 			if (ft_strchr("NWES", map[i][j]) != NULL)
 				player_present++;
 			j++;
@@ -122,7 +122,7 @@ int	is_valid_map(char **map)
 		i++;
 	}
 	if (map_closed(map) == 0 || player_present != 1)
-		return (ft_putstr_fd("File Error : Invalid Map\n", 2), 0);
+		return (ft_putstr_fd("Error\nInvalid Map\n", 2), 0);
 	if (map_closed(map) == -1)
 		return (0);
 	return (1);

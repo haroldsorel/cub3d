@@ -28,13 +28,13 @@ static int	valid_input(t_data *data, char **elem)
 static int	parse_elements(t_data *data, char **elem)
 {
 	if (valid_input(data, elem) == -1)
-		return (ft_putstr_fd("File Error : Wrong Arguments\n", 2), -1);
+		return (ft_putstr_fd("Error\nWrong Arguments\n", 2), -1);
 	if (ft_strcmp(elem[0], "NO") == 0 || ft_strcmp(elem[0], "SO") == 0
 		|| ft_strcmp(elem[0], "WE") == 0 || ft_strcmp(elem[0], "EA") == 0)
 		return (texture_parser(data->map, elem[0], elem[1]));
 	else if (ft_strcmp(elem[0], "F") == 0 || ft_strcmp(elem[0], "C") == 0)
 		return (rgb_parser(data->map, elem[0], elem[1]));
-	ft_putstr_fd("File Error : Wrong Arguments\n", 2);
+	ft_putstr_fd("Error\nWrong Arguments\n", 2);
 	return (-1);
 }
 
@@ -79,7 +79,7 @@ int	parser(t_data *data, int fd)
 	}
 	if (data->map->matrix == NULL)
 	{
-		ft_putstr_fd("File Error : No Map\n", 2);
+		ft_putstr_fd("Error\nNo Map\n", 2);
 		return (free_data(data), -1);
 	}
 	if (map_parser(data) == -1)

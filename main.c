@@ -64,12 +64,12 @@ int	main(int argc, char **argv)
 	t_player	player;
 
 	if (argc != 2)
-		return (ft_putstr_fd("Error: Wrong Arguments\n", 2), 1);
+		return (ft_putstr_fd("Error\nWrong Arguments\n", 2), 1);
 	if (check_file(argv[1]) == -1)
-		return (ft_putstr_fd("Error: Wrong File Extension\n", 2), 1);
+		return (ft_putstr_fd("Error\nWrong File Extension\n", 2), 1);
 	data.fd = open(argv[1], O_RDONLY);
 	if (data.fd == -1)
-		return (perror("Error"), 1);
+		return (perror("Error\nperror"), 1);
 	init_player_struct(&player);
 	init_map_struct(&map);
 	init_data_struct(&data, &map, &player);

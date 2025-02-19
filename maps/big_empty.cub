@@ -1,9 +1,9 @@
 NO textures/bluestone.png
 SO textures/greystone.png
-WE textures/colorstone.png
+WE textures/eagle.png
 EA textures/colorstone.png
 F 128,128,128
-C  0,255,255
+C 0,255,255
 
 111111111111111111111111111111111
 100000000000000000000001000000001

@@ -32,9 +32,9 @@ static int	create_rgb(int r, int g, int b)
 static int	repetition(t_map *map, char *type)
 {
 	if (ft_strcmp(type, "C") == 0 && map->ceiling_color != -1)
-		return (ft_putstr_fd("File Error: Duplicate C Color\n", 2), 1);
+		return (ft_putstr_fd("Error\nDuplicate C Color\n", 2), 1);
 	else if (ft_strcmp(type, "F") == 0 && map->floor_color != -1)
-		return (ft_putstr_fd("File Error: Duplicate F Color\n", 2), 1);
+		return (ft_putstr_fd("Error\nDuplicate F Color\n", 2), 1);
 	return (0);
 }
 
@@ -53,7 +53,8 @@ int	rgb_parser(t_map *map, char *type, char *str)
 	while (rgb[i] != NULL)
 		i++;
 	if (i != 3)
-		return (ft_putstr_fd("File Error : Wrong RGB Values\n", 2), -1);
+		return (ft_putstr_fd("Error\nWrong RGB Values\n", 2), \
+			free_array_of_pointers((void **)rgb), -1);
 	int_rgb[0] = ft_atoi(rgb[0]);
 	int_rgb[1] = ft_atoi(rgb[1]);
 	int_rgb[2] = ft_atoi(rgb[2]);
