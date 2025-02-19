@@ -16,23 +16,23 @@ static void	init_player_direction(t_player *player, char dir)
 {
 	if (dir == 'N')
 	{
-		player->dir.x = 0;
-		player->dir.y = -1;
+		player->dir.x = 0.0001f;
+		player->dir.y = -1.0001f;
 	}
 	if (dir == 'S')
 	{
-		player->dir.x = 0;
-		player->dir.y = 1;
+		player->dir.x = 0.0001f;
+		player->dir.y = 1.0001f;
 	}
 	if (dir == 'E')
 	{
-		player->dir.x = 1;
-		player->dir.y = 0;
+		player->dir.x = 1.0001f;
+		player->dir.y = 0.0001f;
 	}
 	if (dir == 'W')
 	{
-		player->dir.x = -1;
-		player->dir.y = 0;
+		player->dir.x = -1.0001f;
+		player->dir.y = 0.0001f;
 	}
 }
 
